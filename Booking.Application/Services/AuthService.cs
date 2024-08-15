@@ -18,6 +18,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Booking.Domain.Interfaces.UnitsOfWork;
+using System.Text.RegularExpressions;
 
 namespace Booking.Application.Services
 {
@@ -29,7 +30,7 @@ namespace Booking.Application.Services
         private readonly IBaseRepository<UserToken> _userTokenRepository = null!;
         private readonly ITokenService _tokenService;
         private readonly IBaseRepository<Role> _roleRepository = null!;
-          private readonly IUnitOfWork _unitOfWork = null!;
+        private readonly IUnitOfWork _unitOfWork = null!;
 
         public AuthService(IBaseRepository<User> userRepository, ILogger logger, IMapper mapper,
             IBaseRepository<UserToken> userTokenRepository, ITokenService tokenService, 
@@ -56,81 +57,83 @@ namespace Booking.Application.Services
 
                 };
             }
-            try
+
+            string pattern = "([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9_-]+)";
+            if (!Regex.IsMatch(dto.Email, pattern, RegexOptions.IgnoreCase))
             {
-                var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.UserEmail == dto.Email);
-                if(user != null)
+                return new BaseResult<UserDto>()
                 {
-                    return new BaseResult<UserDto>()
+                    ErrorMessage = ErrorMessage.EmailIsNotCorrect,
+                    ErrorCode = (int)ErrorCodes.EmailIsNotCorrect
+
+                };
+            }
+            
+ 
+            var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.UserEmail == dto.Email);
+            if(user != null)
+            {
+                return new BaseResult<UserDto>()
+                {
+                    ErrorMessage = ErrorMessage.UserAlreadyExists,
+                    ErrorCode = (int)ErrorCodes.UserAlreadyExists
+                };
+            }
+            var hashUserPassword = HashPassword(dto.Password);
+
+            using (var transaction = await _unitOfWork.BeginTransactionAsync())
+            {
+                try
+                {
+                    user = new User()
                     {
-                        ErrorMessage = ErrorMessage.UserAlreadyExists,
-                        ErrorCode = (int)ErrorCodes.UserAlreadyExists
+                        UserEmail = dto.Email,
+                        PasswordDk = hashUserPassword,
+                        PasswordSalt = hashUserPassword,
                     };
-                }
-                var hashUserPassword = HashPassword(dto.Password);
+                    await _unitOfWork.Users.CreateAsync(user);
+                    await _unitOfWork.SaveChangesAsync();
 
-                using (var transaction = await _unitOfWork.BeginTransactionAsync())
-                {
-                    try
+                    var role = await _roleRepository.GetAll().FirstOrDefaultAsync(x => x.RoleName == nameof(Roles.User));
+                    if (role == null)
                     {
-                        user = new User()
-                        {
-                            UserEmail = dto.Email,
-                            PasswordDk = hashUserPassword,
-                            PasswordSalt = hashUserPassword,
-                        };
-                        await _unitOfWork.Users.CreateAsync(user);
-                        await _unitOfWork.SaveChangesAsync();
-
-                        var role = await _roleRepository.GetAll().FirstOrDefaultAsync(x => x.RoleName == nameof(Roles.User));
-                        if (role == null)
-                        {
-                            return new BaseResult<UserDto>()
-                            {
-                                ErrorMessage = ErrorMessage.RoleNotFound,
-                                ErrorCode = (int)ErrorCodes.RoleNotFound
-                            };
-                        }
-
-                        UserRole userRole = new UserRole()
-                        {
-                            UserId = user.Id,
-                            RoleId = role.Id
-                        };
-
-                        await _unitOfWork.UserRoles.CreateAsync(userRole);
-
-                        await _unitOfWork.SaveChangesAsync();
-
-                        await transaction.CommitAsync();
-
-                    }
-                    catch (Exception)
-                    {
-                        await transaction.RollbackAsync();
-
                         return new BaseResult<UserDto>()
                         {
-                            ErrorMessage = ErrorMessage.UserWasn_tCreated,
-                            ErrorCode = (int)ErrorCodes.UserWasNotCreated
+                            ErrorMessage = ErrorMessage.RoleNotFound,
+                            ErrorCode = (int)ErrorCodes.RoleNotFound
                         };
                     }
+
+                    UserRole userRole = new UserRole()
+                    {
+                        UserId = user.Id,
+                        RoleId = role.Id
+                    };
+
+                    await _unitOfWork.UserRoles.CreateAsync(userRole);
+
+                    await _unitOfWork.SaveChangesAsync();
+
+                    await transaction.CommitAsync();
+
                 }
+                catch (Exception)
+                {
+                    await transaction.RollbackAsync();
+
+                    return new BaseResult<UserDto>()
+                    {
+                        ErrorMessage = ErrorMessage.UserWasntCreated,
+                        ErrorCode = (int)ErrorCodes.UserWasNotCreated
+                    };
+                }
+            }
                               
-                return new BaseResult<UserDto>()
-                {
-                    Data = _mapper.Map<UserDto>(user)
-                };
-            }
-            catch (Exception ex) 
+            return new BaseResult<UserDto>()
             {
-                _logger.Error(ex, ex.Message);
-                return new BaseResult<UserDto>()
-                {
-                    ErrorMessage = ErrorMessage.InternalIServerError,
-                    ErrorCode = (int)ErrorCodes.InternalServerError
-                };
-            }
+                Data = _mapper.Map<UserDto>(user)
+            };
+
         }
 
         public async Task<BaseResult<TokenDto>> Login(LoginUserDto dto)

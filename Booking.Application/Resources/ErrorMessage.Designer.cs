@@ -61,6 +61,15 @@ namespace Booking.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email is not correct.
+        /// </summary>
+        public static string EmailIsNotCorrect {
+            get {
+                return ResourceManager.GetString("EmailIsNotCorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hotel not found.
         /// </summary>
         public static string HotelNotFound {
@@ -189,9 +198,9 @@ namespace Booking.Application.Resources {
         /// <summary>
         ///   Looks up a localized string similar to User wasn&apos;t created.
         /// </summary>
-        public static string UserWasn_tCreated {
+        public static string UserWasntCreated {
             get {
-                return ResourceManager.GetString("UserWasn\'tCreated", resourceCulture);
+                return ResourceManager.GetString("UserWasntCreated", resourceCulture);
             }
         }
     }

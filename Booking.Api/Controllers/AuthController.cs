@@ -14,10 +14,12 @@ namespace Booking.Api.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService = null!;
+        private readonly IEmailService _emailService = null!;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService, IEmailService emailService)
         {
             _authService = authService;
+            _emailService = emailService;
         }
         /// <summary>
         /// User Registration
@@ -44,6 +46,7 @@ namespace Booking.Api.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult<BaseResult<TokenDto>>> Login([FromBody] LoginUserDto dto)
         {
+            await _emailService.SendConfirmationEmailAsync("oleg@merms.biz", "123456");
             var response = await _authService.Login(dto);
 
             if (response.IsSuccess)

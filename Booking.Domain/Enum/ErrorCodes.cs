@@ -21,6 +21,7 @@ namespace Booking.Domain.Enum
 
         PasswordNotEqualsPasswordConfirm = 21,
         PasswordIsWrong = 22,
+        EmailIsNotCorrect = 23,
 
         RoleAlreadyExists = 31,
         RoleNotFound = 32,
