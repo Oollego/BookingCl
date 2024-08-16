@@ -8,6 +8,8 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
+using Booking.Domain.Dto.User;
+using Booking.Domain.Result;
 
 namespace Booking.Application.Services
 {
@@ -54,15 +56,14 @@ namespace Booking.Application.Services
                 Text = message
             };
 
-            using (var client = new MailKit.Net.Smtp.SmtpClient())
-            {
-                await client.ConnectAsync(_smtpServer, _smtpPort, _useSsl);
-                await client.AuthenticateAsync(_login, _password);
-                await client.SendAsync(emailMessage);
+            using var client = new MailKit.Net.Smtp.SmtpClient();
 
-                await client.DisconnectAsync(true);
-            }
-            
+            await client.ConnectAsync(_smtpServer, _smtpPort, _useSsl);
+            await client.AuthenticateAsync(_login, _password);
+            await client.SendAsync(emailMessage);
+
+            await client.DisconnectAsync(true);
+
         }
     }
 }

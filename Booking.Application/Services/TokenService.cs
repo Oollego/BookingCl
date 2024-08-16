@@ -39,7 +39,7 @@ namespace Booking.Application.Services
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtKey));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var securityToken =
-                new JwtSecurityToken(_issuer, _audience, claims, null, DateTime.UtcNow.AddMinutes(10), credentials);
+                new JwtSecurityToken(_issuer, _audience, claims, null, DateTime.UtcNow.AddMinutes(60), credentials);
             var token = new JwtSecurityTokenHandler().WriteToken(securityToken);
             return token;
         }

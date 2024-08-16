@@ -81,9 +81,9 @@ namespace Booking.Application.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Internal server error.
         /// </summary>
-        public static string InternalIServerError {
+        public static string InternalServerError {
             get {
-                return ResourceManager.GetString("InternalIServerError", resourceCulture);
+                return ResourceManager.GetString("InternalServerError", resourceCulture);
             }
         }
         
@@ -120,6 +120,15 @@ namespace Booking.Application.Resources {
         public static string PasswordNotEqualsPasswordConfirm {
             get {
                 return ResourceManager.GetString("PasswordNotEqualsPasswordConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registration code not found.
+        /// </summary>
+        public static string RegistrationCodeNotFound {
+            get {
+                return ResourceManager.GetString("RegistrationCodeNotFound", resourceCulture);
             }
         }
         
@@ -183,6 +192,15 @@ namespace Booking.Application.Resources {
         public static string UserAlreadyExistsThisRole {
             get {
                 return ResourceManager.GetString("UserAlreadyExistsThisRole", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User is not matched.
+        /// </summary>
+        public static string UserIsNotMatched {
+            get {
+                return ResourceManager.GetString("UserIsNotMatched", resourceCulture);
             }
         }
         

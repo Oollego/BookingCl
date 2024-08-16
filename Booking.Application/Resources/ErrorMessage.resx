@@ -123,7 +123,7 @@
   <data name="HotelNotFound" xml:space="preserve">
     <value>Hotel not found</value>
   </data>
-  <data name="InternalIServerError" xml:space="preserve">
+  <data name="InternalServerError" xml:space="preserve">
     <value>Internal server error</value>
   </data>
   <data name="InvalidClientRequest" xml:space="preserve">
@@ -137,6 +137,9 @@
   </data>
   <data name="PasswordNotEqualsPasswordConfirm" xml:space="preserve">
     <value>Password and password confirm is not equal</value>
+  </data>
+  <data name="RegistrationCodeNotFound" xml:space="preserve">
+    <value>Registration code not found</value>
   </data>
   <data name="RoleAlreadyExists" xml:space="preserve">
     <value>Role already exists</value>
@@ -158,6 +161,9 @@
   </data>
   <data name="UserAlreadyExistsThisRole" xml:space="preserve">
     <value>User already exists this role</value>
+  </data>
+  <data name="UserIsNotMatched" xml:space="preserve">
+    <value>User is not matched</value>
   </data>
   <data name="UserNotFound" xml:space="preserve">
     <value>User not found</value>

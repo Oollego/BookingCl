@@ -17,6 +17,13 @@ namespace Booking.Domain.Interfaces.Services
         Task<BaseResult<UserDto>> Register(RegisterUserDto dto);
 
         /// <summary>
+        /// Confirm registration by code
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        Task<BaseResult<UserDto>> ConfirmRegister(ConfirmRegisterDto dto);
+
+        /// <summary>
         /// User authorization
         /// </summary>
         /// <param name="dto"></param>

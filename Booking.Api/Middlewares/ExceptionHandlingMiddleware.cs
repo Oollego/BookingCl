@@ -40,7 +40,7 @@ namespace Booking.Api.Middlewares
             };
             //ApplicationException _ => new BaseResult() { ErrorMessage = exception.Message, ErrorCode = (int)HttpStatusCode.InternalServerError }
             httpContext.Response.ContentType = "application/json";
-            httpContext.Response.StatusCode = (int)responce.ErrorCode;
+            httpContext.Response.StatusCode = (int)(responce.ErrorCode ?? 0);
             await httpContext.Response.WriteAsJsonAsync(responce);
         }
 

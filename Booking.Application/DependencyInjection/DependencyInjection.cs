@@ -34,7 +34,8 @@ namespace Booking.Application.DependencyInjection
         }
 
         public static void InitServices(this IServiceCollection services) 
-        { 
+        {
+            services.AddScoped<IHashService, HashService>();
             services.AddScoped<IRoomValidator, RoomValidator>();
             services.AddScoped<IValidator<CreateRoomDto>, CreateRoomValidator>();
             services.AddScoped<IValidator<UpdateRoomDto>, UpdateRoomValidator>();

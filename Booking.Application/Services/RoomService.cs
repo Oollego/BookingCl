@@ -79,7 +79,7 @@ namespace Booking.Application.Services
                 _logger.Error(ex, ex.Message);
                 return new BaseResult<RoomDto>()
                 {
-                    ErrorMessage = ErrorMessage.InternalIServerError,
+                    ErrorMessage = ErrorMessage.InternalServerError,
                     ErrorCode = (int)ErrorCodes.InternalServerError
                 };
             }
@@ -122,7 +122,7 @@ namespace Booking.Application.Services
                 _logger.Error(ex, ex.Message);
                 return new BaseResult<RoomDto>()
                 {
-                    ErrorMessage = ErrorMessage.InternalIServerError,
+                    ErrorMessage = ErrorMessage.InternalServerError,
                     ErrorCode = (int)ErrorCodes.InternalServerError
                 };
             }
@@ -155,7 +155,7 @@ namespace Booking.Application.Services
                 _logger.Error(ex, ex.Message);
                 return Task.FromResult(new BaseResult<RoomDto>()
                 {
-                    ErrorMessage = ErrorMessage.InternalIServerError,
+                    ErrorMessage = ErrorMessage.InternalServerError,
                     ErrorCode = (int)ErrorCodes.InternalServerError
                 });
             }
@@ -192,7 +192,7 @@ namespace Booking.Application.Services
                 _logger.Error(ex, ex.Message);
                 return new CollectionResult<RoomDto>()
                 {
-                    ErrorMessage = ErrorMessage.InternalIServerError,
+                    ErrorMessage = ErrorMessage.InternalServerError,
                     ErrorCode = (int)ErrorCodes.InternalServerError
                 };
             }
@@ -259,7 +259,7 @@ namespace Booking.Application.Services
                 _logger.Error(ex, ex.Message);
                 return new BaseResult<RoomDto>()
                 {
-                    ErrorMessage = ErrorMessage.InternalIServerError,
+                    ErrorMessage = ErrorMessage.InternalServerError,
                     ErrorCode = (int)ErrorCodes.InternalServerError
                 };
             }

@@ -14,12 +14,12 @@ namespace Booking.Api.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService = null!;
-        private readonly IEmailService _emailService = null!;
+        private readonly IHashService _hashService = null!;
 
-        public AuthController(IAuthService authService, IEmailService emailService)
+        public AuthController(IAuthService authService, IHashService hashService)
         {
             _authService = authService;
-            _emailService = emailService;
+            _hashService = hashService;
         }
         /// <summary>
         /// User Registration
@@ -38,6 +38,18 @@ namespace Booking.Api.Controllers
             return BadRequest(response);
         }
 
+        [HttpPost("confirm_register")]
+        public async Task<ActionResult<BaseResult<UserDto>>> ConfirmRegister([FromBody] ConfirmRegisterDto dto)
+        {
+            var response = await _authService.ConfirmRegister(dto);
+
+            if (response.IsSuccess)
+            {
+                return Ok(response);
+            }
+            return BadRequest(response);
+        }
+
         /// <summary>
         /// User Login
         /// </summary>
@@ -46,7 +58,6 @@ namespace Booking.Api.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult<BaseResult<TokenDto>>> Login([FromBody] LoginUserDto dto)
         {
-            await _emailService.SendConfirmationEmailAsync("oleg@merms.biz", "123456");
             var response = await _authService.Login(dto);
 
             if (response.IsSuccess)
