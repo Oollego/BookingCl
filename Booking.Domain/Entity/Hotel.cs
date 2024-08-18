@@ -16,12 +16,16 @@ namespace Booking.Domain.Entity
         public string HotelPhoto { get; set; } = null!;
         public string CityGuide { get; set; } = null!;
         public string Description { get; set; } = null!;
+        public int Stars { get; set; }
         public int FixedDays { get; set; }
         public bool IsPet { get; set; }
+        public long CityId { get; set; }
+        public City City { get; set; } = null!;
         public List<Room> Rooms { get; set; } = null!;
         public List<HotelInfoCell> HotelInfoCells { get; set; } = null!;
         public List<NearPlace> NearPlaces { get; set; } = null!;
         public List<Review> Reviews { get; set; } = null!;
         public List<Facility> Facilities { get; set; } = null!;
+        public List<HotelComfortIconType> HotelComfortIcons { get; set; } = null!;
     }
 }

@@ -21,6 +21,20 @@ namespace Booking.DAL.Configurations
                 .WithOne(x => x.CardType)
                 .HasForeignKey(x => x.CardTypeId)
                 .HasPrincipalKey(x => x.Id);
+            builder.HasData(new List<CardType>()
+            {
+                new CardType()
+                {
+                    Id = 1,
+                    CardName = "Visa",
+                },
+                new CardType()
+                {
+                    Id = 2,
+                    CardName = "MasterCard",
+                }
+
+            });
         }
     }
 }

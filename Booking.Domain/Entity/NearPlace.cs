@@ -10,12 +10,11 @@ namespace Booking.Domain.Entity
     public class NearPlace 
     {
         public long Id { get; set; }
-        public string PlaceName { get; set; } = null!;
         public string Distance { get; set; } = null!;
         public bool DistanceMetric { get; set; } = false;
         public long HotelId { get; set; }
         public Hotel Hotel { get; set; } = null!;
-        public long NearPlaceGroupId { get; set; }
-        public NearPlaceGroup NearPlaceGroup { get; set; } = null!;
+        public long NearPlaceNameId { get; set; }
+        public NearPlaceName NearPlaceName { get; set; } = null!;
     }
 }

@@ -10,5 +10,6 @@ namespace Booking.Domain.Entity
     {
         public long RoomId { get; set; }
         public long BedTypeId { get; set; }
+        public int BedQuantity {get; set;}
     }
 }

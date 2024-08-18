@@ -1,6 +1,8 @@
 ﻿using Booking.DAL.Interceptors;
 using Booking.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +22,8 @@ namespace Booking.DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.LogTo(message => System.Diagnostics.Debug.WriteLine(message), LogLevel.Information);
+            optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
             //optionsBuilder.AddInterceptors(new DateInterceptor());
             
         }

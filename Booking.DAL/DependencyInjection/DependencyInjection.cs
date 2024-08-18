@@ -39,6 +39,7 @@ namespace Booking.DAL.DependencyInjection
             services.AddScoped<IBaseRepository<UserToken>, BaseRepository<UserToken>>();
             services.AddScoped<IBaseRepository<Role>, BaseRepository<Role>>();
             services.AddScoped<IBaseRepository<UserRole>, BaseRepository<UserRole>>();
+            services.AddScoped<IBaseRepository<Review>, BaseRepository<Review>>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }

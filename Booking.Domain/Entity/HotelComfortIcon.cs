@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Booking.Domain.Entity
 {
-    public class RoomFacility
+    public class HotelComfortIcon
     {
-        public long RoomId { get; set; }
-        public long FacilityTypeId { get; set; }
+        public long HotelId { get; set; }
+        public long HotelComfortIconTypeId { get; set; }
     }
 }

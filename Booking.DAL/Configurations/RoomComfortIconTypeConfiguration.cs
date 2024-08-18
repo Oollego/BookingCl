@@ -19,6 +19,27 @@ namespace Booking.DAL.Configurations
               l => l.HasOne<Room>().WithMany().HasForeignKey(x => x.RoomId),
               l => l.HasOne<RoomComfortIconType>().WithMany().HasForeignKey(x => x.RoomComfortIconTypeId)
               );
+            builder.HasData(new List<RoomComfortIconType>()
+            {
+                new RoomComfortIconType()
+                {
+                    Id = 1,
+                    ComfortIcon = "wifi.png",
+                    ComfortName = "free wi-fi"
+                },
+                new RoomComfortIconType()
+                {
+                    Id = 2,    
+                    ComfortIcon = "bath.png",
+                    ComfortName = "bath"
+                },
+                new RoomComfortIconType()
+                {
+                    Id = 3,
+                    ComfortIcon = "pool.png",
+                    ComfortName = "private pool"
+                }
+            });
         }
     }
 }

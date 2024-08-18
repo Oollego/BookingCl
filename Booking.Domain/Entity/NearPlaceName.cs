@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Booking.Domain.Entity
 {
-    public class NearPlaceGroup
+    public class NearPlaceName
     {
-        public long id {  get; set; }
-        public string GroupName { get; set; } = null!;
-        public string GroupIcon { get; set; } = null!;
+        public long Id {  get; set; }
+        public string Name { get; set; } = null!;
+        public string? Icon { get; set; } = null!;
         public List<NearPlace> NearPlaces { get; set; } = null!;
     }
 }

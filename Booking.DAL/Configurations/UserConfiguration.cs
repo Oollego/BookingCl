@@ -36,20 +36,50 @@ namespace Booking.DAL.Configurations
                .HasForeignKey(x => x.UserId)
                .HasPrincipalKey(x => x.Id);
 
+            builder.HasData(new List<User> 
+            {
+                new User
+                {
+                    Id = 1,
+                    UserEmail = "oleg@com",
+                    PasswordDk = "0D1285F72551DCB2F40D715CC0F7703C",
+                    PasswordSalt = "67B8E358D171BEFC2A23A7308AB84A7C",
+                    RegisteredAt = DateTime.Now,
+                },
+                 new User
+                {
+                    Id = 2,
+                    UserEmail = "alex@com",
+                    PasswordDk = "0D1285F72551DCB2F40D715CC0F7703C",
+                    PasswordSalt = "67B8E358D171BEFC2A23A7308AB84A7C",
+                    RegisteredAt = DateTime.Now,
+                },
+                 new User
+                {
+                    Id = 3,
+                    UserEmail = "dasha@com",
+                    PasswordDk = "0D1285F72551DCB2F40D715CC0F7703C",
+                    PasswordSalt = "67B8E358D171BEFC2A23A7308AB84A7C",
+                    RegisteredAt = DateTime.Now,
+                },
+                 new User
+                {
+                    Id = 4,
+                    UserEmail = "oleg12@com",
+                    PasswordDk = "0D1285F72551DCB2F40D715CC0F7703C",
+                    PasswordSalt = "67B8E358D171BEFC2A23A7308AB84A7C",
+                    RegisteredAt = DateTime.Now,
+                },
+                 new User
+                {
+                    Id = 5,
+                    UserEmail = "oleg123@com",
+                    PasswordDk = "0D1285F72551DCB2F40D715CC0F7703C",
+                    PasswordSalt = "67B8E358D171BEFC2A23A7308AB84A7C",
+                    RegisteredAt = DateTime.Now,
+                }
 
-            //builder.HasData(new List<User>()
-            //{
-            //    new User()
-            //    {
-            //        Id = 1,
-            //        UserEmail = "admin",
-            //        PasswordDk = "password",
-            //        PasswordSalt = "Salt",
-            //        UpdatedBy = 1
-            //    }
-
-            //});
-
+            });
         }
     }
 }

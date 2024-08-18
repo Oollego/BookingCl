@@ -10,6 +10,7 @@ namespace Booking.Domain.Entity
     {
         public long Id { get; set; }
         public string CountryName { get; set; } = null!;
+        public string FlagIcon { get; set; } = null!;
         public List<City> Cities { get; set; } = null!;
     }
 }

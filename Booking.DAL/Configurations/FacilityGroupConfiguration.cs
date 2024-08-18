@@ -23,6 +23,112 @@ namespace Booking.DAL.Configurations
                 .WithOne(x => x.FacilityGroup)
                 .HasForeignKey(x => x.FacilityGroupId)
                 .HasPrincipalKey(x => x.Id);
+
+            builder.HasData(new List<FacilityGroup> 
+            {
+                new FacilityGroup
+                {
+                    Id = 1,
+                    FacilityGroupName = "General",
+                    FacilityGroupIcon = "general.png"
+                },
+                 new FacilityGroup
+                {
+                    Id = 2,
+                    FacilityGroupName = "Accessibility",
+                    FacilityGroupIcon = "accessibility.png"
+                },
+                  new FacilityGroup
+                {
+                    Id = 3,
+                    FacilityGroupName = "Languages spoken",
+                    FacilityGroupIcon = "language.png"
+                },
+                  new FacilityGroup
+                {
+                    Id = 4,
+                    FacilityGroupName = "Parking",
+                    FacilityGroupIcon = "parking.png"
+                },
+                  new FacilityGroup
+                {
+                    Id = 5,
+                    FacilityGroupName = "Reception services",
+                    FacilityGroupIcon = "reception.png"
+                },
+                  new FacilityGroup
+                {
+                    Id = 6,
+                    FacilityGroupName = "Cleaning services",
+                    FacilityGroupIcon = "cleaning.png"
+                },
+                  new FacilityGroup
+                {
+                    Id = 7,
+                    FacilityGroupName = "Entertainment and family services",
+                    FacilityGroupIcon = "entertainment.png"
+                },
+                  new FacilityGroup
+                {
+                    Id = 8,
+                    FacilityGroupName = "Safety & security",
+                    FacilityGroupIcon = "safety.png"
+                },
+                  new FacilityGroup
+                {
+                    Id = 9,
+                    FacilityGroupName = "Bathroom",
+                    FacilityGroupIcon = "bathroom.png"
+                },
+                  new FacilityGroup
+                {
+                    Id = 10,
+                    FacilityGroupName = "Bedroom",
+                    FacilityGroupIcon = "bedroom.png"
+                },
+                  new FacilityGroup
+                {
+                    Id = 11,
+                    FacilityGroupName = "Kitchen",
+                    FacilityGroupIcon = "kitchen.png"
+                },
+                  new FacilityGroup
+                {
+                    Id = 12,
+                    FacilityGroupName = "Room Amenities",
+                    FacilityGroupIcon = "room.png"
+                },
+                  new FacilityGroup
+                {
+                    Id = 13,
+                    FacilityGroupName = "Pets",
+                    FacilityGroupIcon = "pets.png"
+                },
+                  new FacilityGroup
+                {
+                    Id = 14,
+                    FacilityGroupName = "Media & Technology",
+                    FacilityGroupIcon = "media.png"
+                },
+                  new FacilityGroup
+                {
+                    Id = 15,
+                    FacilityGroupName = "Media & Technology",
+                    FacilityGroupIcon = "media.png"
+                },
+                  new FacilityGroup
+                {
+                    Id = 16,
+                    FacilityGroupName = "Food & Drinks",
+                    FacilityGroupIcon = "food.png"
+                },
+                  new FacilityGroup
+                {
+                    Id = 17,
+                    FacilityGroupName = "Internet",
+                    FacilityGroupIcon = "internet.png"
+                },
+            });
         }
     }
 }

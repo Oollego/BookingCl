@@ -44,6 +44,7 @@ namespace Booking.Application.DependencyInjection
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<ITopHotelsService, TopHotelsService>();
         }
     }
 

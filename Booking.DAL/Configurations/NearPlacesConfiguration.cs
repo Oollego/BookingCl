@@ -14,9 +14,9 @@ namespace Booking.DAL.Configurations
         public void Configure(EntityTypeBuilder<NearPlace> builder)
         {
             builder.ToTable("near_places");
-            builder.Property(x => x.PlaceName).IsRequired().HasMaxLength(254);
             builder.Property(x => x.Distance).IsRequired();
             builder.Property(x => x.DistanceMetric).HasDefaultValue(false);
+            builder.Property(x => x.NearPlaceNameId).IsRequired();
         }
     }
 }

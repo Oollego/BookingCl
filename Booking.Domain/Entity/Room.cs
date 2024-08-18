@@ -19,7 +19,6 @@ namespace Booking.Domain.Entity
         public Hotel Hotel { get; set; } = null!;
         public List<RoomPhoto> RoomPhotos { get; set; } = null!;
         public List<BedType> BedTypes { get; set; } = null!;
-        public List<RoomFacilityType> RoomFacilityTypes { get; set; } = null!;
         public List<Book> Books { get; set; } = null!;
         public List<RoomComfortIconType> RoomComfortIcons { get; set; } = null!;
     }

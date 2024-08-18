@@ -18,6 +18,33 @@ namespace Booking.DAL.Configurations
                 .WithOne(x => x.Currency)
                 .HasForeignKey(x => x.CurrencyCodeId)
                 .HasPrincipalKey(x => x.CurrencyCode);
+            builder.HasData(new List<Currency>
+            {
+                new Currency()
+                {
+                    CurrencyCode = "USD",
+                    CurrencyLetter = "$",
+                    CurrencyName = "United States Dollar"
+                },
+                 new Currency()
+                {
+                    CurrencyCode = "EUR",
+                    CurrencyLetter = "€",
+                    CurrencyName = "Euro Member Countries"
+                },
+                 new Currency()
+                {
+                    CurrencyCode = "UAH",
+                    CurrencyLetter = "₴",
+                    CurrencyName = "Ukraine Hryvnia"
+                },
+                 new Currency()
+                 {
+                     CurrencyCode = "GBP",
+                     CurrencyLetter = "£",
+                     CurrencyName = "United Kingdom Pound"
+                 }
+            });
         }
     }
 }
