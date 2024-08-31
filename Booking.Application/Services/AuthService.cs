@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Booking.Application.Resources;
 using Booking.Domain.Dto;
-using Booking.Domain.Dto.RoomDto;
+using Booking.Domain.Dto.Room;
 using Booking.Domain.Dto.User;
 using Booking.Domain.Entity;
 using Booking.Domain.Enum;
@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 using Booking.Domain.Interfaces.UnitsOfWork;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Caching.Memory;
-using Booking.Application.CasheDto;
+using Booking.Application.Cashe;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Org.BouncyCastle.Crypto.Parameters;
 
@@ -34,14 +34,14 @@ namespace Booking.Application.Services
         private readonly IBaseRepository<UserToken> _userTokenRepository = null!;
         private readonly ITokenService _tokenService;
         private readonly IBaseRepository<Role> _roleRepository = null!;
-        private readonly IUnitOfWork _unitOfWork = null!;
+        private readonly IRoleUnitOfWork _unitOfWork = null!;
         private readonly IHashService _hashService = null!;
         private readonly IMemoryCache _memoryCache = null!;
         private readonly IEmailService _emailService = null!;
 
         public AuthService(IBaseRepository<User> userRepository, ILogger logger, IMapper mapper,
             IBaseRepository<UserToken> userTokenRepository, ITokenService tokenService,
-            IBaseRepository<Role> roleRepository, IUnitOfWork unitOfWork, IHashService hashService, 
+            IBaseRepository<Role> roleRepository, IRoleUnitOfWork unitOfWork, IHashService hashService, 
             IMemoryCache memoryCache, IEmailService emailService )
         {
             _userRepository = userRepository;

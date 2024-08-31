@@ -11,8 +11,9 @@ namespace Booking.DAL.Configurations
             builder.ToTable("currencies");
             builder.HasKey(x => x.CurrencyCode);
             builder.Property(x => x.CurrencyCode).IsRequired().HasMaxLength(3);
-            builder.Property(x => x.CurrencyLetter).IsRequired().HasMaxLength(1);
+            builder.Property(x => x.CurrencyChar).IsRequired().HasMaxLength(1);
             builder.Property(x => x.CurrencyName).HasMaxLength(100);
+            builder.Property(x => x.ExchangeRate).IsRequired();
 
             builder.HasMany<UserProfile>(x => x.UserProfiles)
                 .WithOne(x => x.Currency)
@@ -23,26 +24,30 @@ namespace Booking.DAL.Configurations
                 new Currency()
                 {
                     CurrencyCode = "USD",
-                    CurrencyLetter = "$",
-                    CurrencyName = "United States Dollar"
+                    CurrencyChar = "$",
+                    CurrencyName = "United States Dollar",
+                    ExchangeRate = 41.2881
                 },
                  new Currency()
                 {
                     CurrencyCode = "EUR",
-                    CurrencyLetter = "€",
-                    CurrencyName = "Euro Member Countries"
+                    CurrencyChar = "€",
+                    CurrencyName = "Euro Member Countries",
+                    ExchangeRate = 45.9826
                 },
                  new Currency()
                 {
                     CurrencyCode = "UAH",
-                    CurrencyLetter = "₴",
-                    CurrencyName = "Ukraine Hryvnia"
+                    CurrencyChar = "₴",
+                    CurrencyName = "Ukraine Hryvnia",
+                    ExchangeRate = 1
                 },
                  new Currency()
                  {
                      CurrencyCode = "GBP",
-                     CurrencyLetter = "£",
-                     CurrencyName = "United Kingdom Pound"
+                     CurrencyChar = "£",
+                     CurrencyName = "United Kingdom Pound",
+                     ExchangeRate = 54.137
                  }
             });
         }

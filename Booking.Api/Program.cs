@@ -41,8 +41,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Booking Swagger v1.0");
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Booking Swagger v2.0");
-       // c.RoutePrefix = string.Empty;
+        //c.SwaggerEndpoint("/swagger/v1/swagger.json", "Booking Swagger v2.0");
+        // c.RoutePrefix = string.Empty;
     });
 }
 

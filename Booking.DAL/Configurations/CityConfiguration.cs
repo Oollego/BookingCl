@@ -11,6 +11,7 @@ namespace Booking.DAL.Configurations
             builder.ToTable("cities");
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.CityName).HasMaxLength(254).IsRequired();
+            builder.Property(x => x.AirPortName).HasMaxLength(254).HasDefaultValue("");
             builder.Property(x => x.CountryId).IsRequired();
 
             builder.HasMany<UserProfile>(x => x.UserProfiles)
@@ -269,80 +270,84 @@ namespace Booking.DAL.Configurations
                 new City { Id = 174, CityName = "Iași", CountryId = 35 },
                 new City { Id = 175, CityName = "Constanța", CountryId = 35 },
 
-                // Russia
-                new City { Id = 176, CityName = "Moscow", CountryId = 36 },
-                new City { Id = 177, CityName = "Saint Petersburg", CountryId = 36 },
-                new City { Id = 178, CityName = "Novosibirsk", CountryId = 36 },
-                new City { Id = 179, CityName = "Yekaterinburg", CountryId = 36 },
-                new City { Id = 180, CityName = "Kazan", CountryId = 36 },
+                 //Republic of Moldova
+                new City { Id = 176, CityName = "Chișinău", CountryId = 46 },
+                new City { Id = 177, CityName = "Bălți", CountryId = 46 },
+                new City { Id = 178, CityName = "Tiraspol", CountryId = 46 },
+                new City { Id = 179, CityName = "Cahul", CountryId = 46 },
+                new City { Id = 180, CityName = "Orhei", CountryId = 46 },
 
                 // Serbia
-                new City { Id = 181, CityName = "Belgrade", CountryId = 37 },
-                new City { Id = 182, CityName = "Novi Sad", CountryId = 37 },
-                new City { Id = 183, CityName = "Niš", CountryId = 37 },
-                new City { Id = 184, CityName = "Kragujevac", CountryId = 37 },
-                new City { Id = 185, CityName = "Subotica", CountryId = 37 },
+                new City { Id = 181, CityName = "Belgrade",     CountryId = 36 },
+                new City { Id = 182, CityName = "Novi Sad",     CountryId = 36 },
+                new City { Id = 183, CityName = "Niš",          CountryId = 36 },
+                new City { Id = 184, CityName = "Kragujevac",   CountryId = 36 },
+                new City { Id = 185, CityName = "Subotica",     CountryId = 36 },
 
                 // Slovakia
-                new City { Id = 186, CityName = "Bratislava", CountryId = 38 },
-                new City { Id = 187, CityName = "Košice", CountryId = 38 },
-                new City { Id = 188, CityName = "Prešov", CountryId = 38 },
-                new City { Id = 189, CityName = "Žilina", CountryId = 38 },
-                new City { Id = 190, CityName = "Nitra", CountryId = 38 },
+                new City { Id = 186, CityName = "Bratislava",   CountryId = 37 },
+                new City { Id = 187, CityName = "Košice",       CountryId = 37 },
+                new City { Id = 188, CityName = "Prešov",       CountryId = 37 },
+                new City { Id = 189, CityName = "Žilina",       CountryId = 37 },
+                new City { Id = 190, CityName = "Nitra",        CountryId = 37 },
 
                 // Slovenia
-                new City { Id = 191, CityName = "Ljubljana", CountryId = 39 },
-                new City { Id = 192, CityName = "Maribor", CountryId = 39 },
-                new City { Id = 193, CityName = "Kranj", CountryId = 39 },
-                new City { Id = 194, CityName = "Celje", CountryId = 39 },
-                new City { Id = 195, CityName = "Koper", CountryId = 39 },
+                new City { Id = 191, CityName = "Ljubljana",    CountryId = 38 },
+                new City { Id = 192, CityName = "Maribor",      CountryId = 38 },
+                new City { Id = 193, CityName = "Kranj",        CountryId = 38 },
+                new City { Id = 194, CityName = "Celje",        CountryId = 38 },
+                new City { Id = 195, CityName = "Koper",        CountryId = 38 },
 
                 // Spain
-                new City { Id = 196, CityName = "Madrid", CountryId = 40 },
-                new City { Id = 197, CityName = "Barcelona", CountryId = 40 },
-                new City { Id = 198, CityName = "Seville", CountryId = 40 },
-                new City { Id = 199, CityName = "Valencia", CountryId = 40 },
-                new City { Id = 200, CityName = "Bilbao", CountryId = 40 },
+                new City { Id = 196, CityName = "Madrid",       CountryId = 39 },
+                new City { Id = 197, CityName = "Barcelona",    CountryId = 39 },
+                new City { Id = 198, CityName = "Seville",      CountryId = 39 },
+                new City { Id = 199, CityName = "Valencia",     CountryId = 39 },
+                new City { Id = 200, CityName = "Bilbao",       CountryId = 39 },
 
                 // Sweden
-                new City { Id = 201, CityName = "Stockholm", CountryId = 41 },
-                new City { Id = 202, CityName = "Gothenburg", CountryId = 41 },
-                new City { Id = 203, CityName = "Malmö", CountryId = 41 },
-                new City { Id = 204, CityName = "Uppsala", CountryId = 41 },
-                new City { Id = 205, CityName = "Västerås", CountryId = 41 },
+                new City { Id = 201, CityName = "Stockholm",    CountryId = 40 },
+                new City { Id = 202, CityName = "Gothenburg",   CountryId = 40 },
+                new City { Id = 203, CityName = "Malmö",        CountryId = 40 },
+                new City { Id = 204, CityName = "Uppsala",      CountryId = 40 },
+                new City { Id = 205, CityName = "Västerås",     CountryId = 40 },
 
                 // Switzerland
-                new City { Id = 206, CityName = "Bern", CountryId = 42 },
-                new City { Id = 207, CityName = "Zurich", CountryId = 42 },
-                new City { Id = 208, CityName = "Geneva", CountryId = 42 },
-                new City { Id = 209, CityName = "Basel", CountryId = 42 },
-                new City { Id = 210, CityName = "Lausanne", CountryId = 42 },
+                new City { Id = 206, CityName = "Bern",         CountryId = 41 },
+                new City { Id = 207, CityName = "Zurich",       CountryId = 41 },
+                new City { Id = 208, CityName = "Geneva",       CountryId = 41 },
+                new City { Id = 209, CityName = "Basel",        CountryId = 41 },
+                new City { Id = 210, CityName = "Lausanne",     CountryId = 41 },
 
                 // Turkey
-                new City { Id = 211, CityName = "Ankara", CountryId = 43 },
-                new City { Id = 212, CityName = "Istanbul", CountryId = 43 },
-                new City { Id = 213, CityName = "Izmir", CountryId = 43 },
-                new City { Id = 214, CityName = "Antalya", CountryId = 43 },
-                new City { Id = 215, CityName = "Bursa", CountryId = 43 },
+                new City { Id = 211, CityName = "Ankara", CountryId = 42 },
+                new City { Id = 212, CityName = "Istanbul", CountryId = 42 },
+                new City { Id = 213, CityName = "Izmir", CountryId = 42 },
+                new City { Id = 214, CityName = "Antalya", CountryId = 42 },
+                new City { Id = 215, CityName = "Bursa", CountryId = 42 },
 
                 // Ukraine
-                new City { Id = 216, CityName = "Kyiv", CountryId = 44 },
-                new City { Id = 217, CityName = "Lviv", CountryId = 44 },
-                new City { Id = 218, CityName = "Odessa", CountryId = 44 },
-                new City { Id = 219, CityName = "Kharkiv", CountryId = 44 },
-                new City { Id = 220, CityName = "Dnipro", CountryId = 44 },
+                new City { Id = 216, CityName = "Kyiv", CountryId = 43 },
+                new City { Id = 217, CityName = "Lviv", CountryId = 43 },
+                new City { Id = 218, CityName = "Odessa", CountryId = 43 },
+                new City { Id = 219, CityName = "Kharkiv", CountryId = 43 },
+                new City { Id = 220, CityName = "Dnipro", CountryId = 43 },
 
                 // United Kingdom
-                new City { Id = 221, CityName = "London", CountryId = 45 },
-                new City { Id = 222, CityName = "Edinburgh", CountryId = 45 },
-                new City { Id = 223, CityName = "Manchester", CountryId = 45 },
-                new City { Id = 224, CityName = "Birmingham", CountryId = 45 },
-                new City { Id = 225, CityName = "Liverpool", CountryId = 45 },
-                new City { Id = 226, CityName = "Glasgow", CountryId = 45 },
+                new City { Id = 221, CityName = "London", CountryId = 44 },
+                new City { Id = 222, CityName = "Edinburgh", CountryId = 44 },
+                new City { Id = 223, CityName = "Manchester", CountryId = 44 },
+                new City { Id = 224, CityName = "Birmingham", CountryId = 44 },
+                new City { Id = 225, CityName = "Liverpool", CountryId = 44 },
+                new City { Id = 226, CityName = "Glasgow", CountryId = 44 },
 
                 // Vatican City
-                new City { Id = 227, CityName = "Vatican City", CountryId = 46 }
+                new City { Id = 227, CityName = "Vatican", CountryId = 45 },
+
+               
             });
+
+
 
         }
     }

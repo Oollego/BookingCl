@@ -11,6 +11,8 @@ namespace Booking.DAL.Configurations
             builder.ToTable("bed_types");
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.BedTypeName).IsRequired().HasMaxLength(254);
+            builder.Property(x => x.Adult).IsRequired();
+            builder.Property(x => x.Children).HasDefaultValue(0);
            
             builder.HasMany(x => x.Rooms)
            .WithMany(x => x.BedTypes)
@@ -24,22 +26,30 @@ namespace Booking.DAL.Configurations
                  new BedType()
                 {
                     Id = 1,
-                    BedTypeName = "twin-sized bed"
+                    BedTypeName = "twin-sized bed",
+                    Adult = 1,
+                    Children = 0
                 },
                   new BedType()
                 {
                     Id = 2,
-                    BedTypeName = "double-sized bed"
+                    BedTypeName = "double-sized bed",
+                    Adult = 2,
+                    Children = 0
                 },
                 new BedType()
                 {
                     Id = 3,
-                    BedTypeName = "queen-sized bed"
+                    BedTypeName = "queen-sized bed",
+                    Adult = 2,
+                    Children = 0
                 },
                  new BedType()
                 {
                     Id = 4,
-                    BedTypeName = "king-sized bed"
+                    BedTypeName = "king-sized bed",
+                    Adult = 2,
+                    Children = 1
                 },
             });
         }

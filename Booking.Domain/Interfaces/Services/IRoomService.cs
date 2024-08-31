@@ -1,11 +1,5 @@
 ﻿using Booking.Domain.Result;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Booking.Domain.Entity;
-using Booking.Domain.Dto.RoomDto;
+using Booking.Domain.Dto.Room;
 
 namespace Booking.Domain.Interfaces.Services
 {
@@ -30,19 +24,19 @@ namespace Booking.Domain.Interfaces.Services
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        Task<BaseResult<RoomDto>> CreatRoomAsync(CreateRoomDto dto);
+        Task<BaseResult<RoomResposeDto>> CreatRoomAsync(CreateRoomDto dto);
 
         /// <summary>
         /// Delete room by Id
         /// </summary>
         /// <param name="roomId"></param>
         /// <returns></returns>
-        Task<BaseResult<RoomDto>> DeleteRoomAsync(long roomId);
+        Task<BaseResult<RoomResposeDto>> DeleteRoomAsync(long roomId);
         /// <summary>
         /// Update room
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        Task<BaseResult<RoomDto>> UpdateRoomAsync(UpdateRoomDto dto);
+        Task<BaseResult<RoomResposeDto>> UpdateRoomAsync(UpdateRoomDto dto);
     }
 }

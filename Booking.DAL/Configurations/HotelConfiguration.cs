@@ -10,11 +10,12 @@ namespace Booking.DAL.Configurations
         public void Configure(EntityTypeBuilder<Hotel> builder)
         {
             builder.ToTable("Hotels");
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.HotelName).HasMaxLength(254).IsRequired();
             builder.Property(x => x.HotelAddress).HasMaxLength(254).IsRequired();
             builder.Property(x => x.HotelPhone).HasMaxLength(25).HasDefaultValue("");
-            builder.Property(x => x.HotelPhoto).HasMaxLength(254).HasDefaultValue("");
+            builder.Property(x => x.HotelImage).HasMaxLength(254).HasDefaultValue("");
             builder.Property(x => x.Description).HasMaxLength(3000).HasDefaultValue("");
             builder.Property(x => x.CityGuide).HasMaxLength(1200).HasDefaultValue("");
             builder.Property(x => x.Stars).HasDefaultValue(0);
@@ -31,7 +32,7 @@ namespace Booking.DAL.Configurations
                 .WithOne(x => x.Hotel)
                 .HasForeignKey(x => x.HotelId)
                 .HasPrincipalKey(x => x.Id);
-            builder.HasMany<NearPlace>(x => x.NearPlaces)
+            builder.HasMany<NearStation>(x => x.NearStations)
                 .WithOne(x => x.Hotel)
                 .HasForeignKey(x => x.HotelId)
                 .HasPrincipalKey(x => x.Id);
@@ -57,7 +58,7 @@ namespace Booking.DAL.Configurations
                     HotelName = "Hotel Azure",
                     HotelAddress = "1 Seaside Rd, Barcelona, Spain",
                     HotelPhone = "+34 931 123 456",
-                    HotelPhoto = "32525685.webp",
+                    HotelImage = "32525685.webp",
                     CityGuide = "Located on the beautiful Barcelona beachfront.",
                     Description = "Hotel Azure offers comfort with a view of the Mediterranean Sea.",
                     Stars = 4,
@@ -71,7 +72,7 @@ namespace Booking.DAL.Configurations
                     HotelName = "Greenwood Hotel",
                     HotelAddress = "12 Forest Lane, Madrid, Spain",
                     HotelPhone = "+34 915 987 654",
-                    HotelPhoto = "66611711.webp",
+                    HotelImage = "66611711.webp",
                     CityGuide = "A peaceful retreat surrounded by the lush parks of Madrid.",
                     Description = "Greenwood Hotel is a perfect escape to nature in Spain's capital.",
                     Stars = 5,
@@ -85,7 +86,7 @@ namespace Booking.DAL.Configurations
                     HotelName = "Urban Central",
                     HotelAddress = "10 Friedrichstrasse, Berlin, Germany",
                     HotelPhone = "+49 30 789 0123",
-                    HotelPhoto = "395641436.webp",
+                    HotelImage = "395641436.webp",
                     CityGuide = "Located in the vibrant heart of Berlin, ideal for business and leisure.",
                     Description = "Urban Central combines luxury with the bustling energy of Berlin.",
                     Stars = 5,
@@ -99,7 +100,7 @@ namespace Booking.DAL.Configurations
                     HotelName = "Mountain Retreat",
                     HotelAddress = "55 Alpine Rd, Hamburg, Germany",
                     HotelPhone = "+49 8821 123 456",
-                    HotelPhoto = "561822462.webp",
+                    HotelImage = "561822462.webp",
                     CityGuide = "Nestled in the Bavarian Alps, perfect for ski enthusiasts.",
                     Description = "Mountain Retreat offers stunning views of the Zugspitze.",
                     Stars = 4,
@@ -113,7 +114,7 @@ namespace Booking.DAL.Configurations
                     HotelName = "Coastal Escape",
                     HotelAddress = "9 Promenade des Anglais, Nice, Odessa",
                     HotelPhone = "+34 4 93 123 456",
-                    HotelPhoto = "183805356.webp",
+                    HotelImage = "183805356.webp",
                     CityGuide = "Overlooking the Mediterranean, perfect for a seaside holiday.",
                     Description = "Coastal Escape provides luxury on the famous French Riviera.",
                     Stars = 4,
@@ -127,7 +128,7 @@ namespace Booking.DAL.Configurations
                     HotelName = "Hotel Royal",
                     HotelAddress = "22 Maidan Nezalezhnosti, Kyiv, Ukraine",
                     HotelPhone = "+380 44 123 4567",
-                    HotelPhoto = "245015962.webp",
+                    HotelImage = "245015962.webp",
                     CityGuide = "Located in the heart of Kyiv, overlooking Independence Square.",
                     Description = "Hotel Royal combines modern luxury with Ukrainian hospitality.",
                     Stars = 5,
@@ -141,7 +142,7 @@ namespace Booking.DAL.Configurations
                     HotelName = "Riverside Hotel",
                     HotelAddress = "18 Dnipro Embankment, Dnipro, Ukraine",
                     HotelPhone = "+380 56 987 6543",
-                    HotelPhoto = "548107817.webp",
+                    HotelImage = "548107817.webp",
                     CityGuide = "Situated along the Dnipro River, offering serene views.",
                     Description = "Riverside Hotel is a tranquil escape in the city of Dnipro.",
                     Stars = 4,
@@ -155,7 +156,7 @@ namespace Booking.DAL.Configurations
                     HotelName = "Central Park Hotel",
                     HotelAddress = "15 Khreshchatyk St, Kyiv, Ukraine",
                     HotelPhone = "+380 44 789 0123",
-                    HotelPhoto = "315505921.webp",
+                    HotelImage = "315505921.webp",
                     CityGuide = "In the center of Kyiv, perfect for business and leisure.",
                     Description = "Central Park Hotel offers luxury and comfort in the capital.",
                     Stars = 5,
@@ -169,7 +170,7 @@ namespace Booking.DAL.Configurations
                     HotelName = "Seaside Hotel",
                     HotelAddress = "3 Playa del Postiguet, Valencia, Spain",
                     HotelPhone = "+34 965 123 789",
-                    HotelPhoto = "567615599.webp",
+                    HotelImage = "567615599.webp",
                     CityGuide = "Located on the beautiful beaches of Alicante.",
                     Description = "Seaside Hotel offers breathtaking views of the Mediterranean.",
                     Stars = 4,
@@ -183,7 +184,7 @@ namespace Booking.DAL.Configurations
                     HotelName = "The Grand Hotel",
                     HotelAddress = "1 Unter den Linden, Berlin, Germany",
                     HotelPhone = "+49 30 987 6543",
-                    HotelPhoto = "451889310.webp",
+                    HotelImage = "451889310.webp",
                     CityGuide = "A historic hotel located on the iconic Unter den Linden boulevard.",
                     Description = "The Grand Hotel blends historic charm with modern luxury.",
                     Stars = 5,
@@ -197,7 +198,7 @@ namespace Booking.DAL.Configurations
                     HotelName = "City Palace",
                     HotelAddress = "7 Andriyivskyy Descent, Kyiv, Ukraine",
                     HotelPhone = "+380 44 555 7890",
-                    HotelPhoto = "250530652.webp",
+                    HotelImage = "250530652.webp",
                     CityGuide = "Situated near the historic Andriyivskyy Descent.",
                     Description = "City Palace offers luxury accommodation in a cultural setting.",
                     Stars = 5,
@@ -211,7 +212,7 @@ namespace Booking.DAL.Configurations
                     HotelName = "Boutique Hotel Madrid",
                     HotelAddress = "33 Gran Via, Madrid, Spain",
                     HotelPhone = "+34 915 567 890",
-                    HotelPhoto = "https://example.com/photos/hotel12.jpg",
+                    HotelImage = "212052051.webp",
                     CityGuide = "Located on the vibrant Gran Via, perfect for shopping and dining.",
                     Description = "Boutique Hotel Madrid combines style with central convenience.",
                     Stars = 4,
@@ -225,7 +226,7 @@ namespace Booking.DAL.Configurations
                     HotelName = "Lakeview Inn",
                     HotelAddress = "44 Am Stadtpark, Hamburg, Germany",
                     HotelPhone = "+49 40 123 4567",
-                    HotelPhoto = "264682690.webp",
+                    HotelImage = "264682690.webp",
                     CityGuide = "Overlooking the Alster Lake, offering serene views in Hamburg.",
                     Description = "Lakeview Inn is a peaceful retreat in the heart of Hamburg.",
                     Stars = 4,
@@ -239,7 +240,7 @@ namespace Booking.DAL.Configurations
                     HotelName = "Ocean Breeze Hotel",
                     HotelAddress = "23 Paseo de la Castellana, Madrid, Spain",
                     HotelPhone = "+34 915 876 543",
-                    HotelPhoto = "494885390.webp",
+                    HotelImage = "494885390.webp",
                     CityGuide = "Located in the business district of Madrid.",
                     Description = "Ocean Breeze Hotel offers modern luxury with excellent amenities.",
                     Stars = 4,
@@ -253,7 +254,7 @@ namespace Booking.DAL.Configurations
                     HotelName = "Countryside Inn",
                     HotelAddress = "88 Rural Rd, Stuttgart, Germany",
                     HotelPhone = "+49 89 654 3210",
-                    HotelPhoto = "105001905.webp",
+                    HotelImage = "105001905.webp",
                     CityGuide = "Nestled in the Bavarian countryside, ideal for a peaceful retreat.",
                     Description = "Countryside Inn offers a rustic experience with modern comforts.",
                     Stars = 3,

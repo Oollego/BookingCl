@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Booking.Domain.Dto.RoomDto;
+using Booking.Domain.Dto.Room;
 using Booking.Domain.Entity;
 
 namespace Booking.Application.Mapping
@@ -8,7 +8,8 @@ namespace Booking.Application.Mapping
     {
         public RoomMapping() 
         { 
-            CreateMap<Room, RoomDto>().ReverseMap();
+            CreateMap<Room, UpdateRoomDto>().ReverseMap();
+            CreateMap<Room, RoomResposeDto>().ReverseMap();
         }
     }
 }

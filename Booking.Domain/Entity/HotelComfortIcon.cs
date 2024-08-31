@@ -10,5 +10,6 @@ namespace Booking.Domain.Entity
     {
         public long HotelId { get; set; }
         public long HotelComfortIconTypeId { get; set; }
+ 
     }
 }

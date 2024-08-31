@@ -120,6 +120,9 @@
   <data name="EmailIsNotCorrect" xml:space="preserve">
     <value>Email is not correct</value>
   </data>
+  <data name="HotelAlreadyExists" xml:space="preserve">
+    <value>Hotel already exists</value>
+  </data>
   <data name="HotelNotFound" xml:space="preserve">
     <value>Hotel not found</value>
   </data>
@@ -128,6 +131,9 @@
   </data>
   <data name="InvalidClientRequest" xml:space="preserve">
     <value>Invalid client request</value>
+  </data>
+  <data name="InvalidParameters" xml:space="preserve">
+    <value>Invalid parameters</value>
   </data>
   <data name="InvalidToken" xml:space="preserve">
     <value>Invalid token</value>
@@ -140,6 +146,9 @@
   </data>
   <data name="RegistrationCodeNotFound" xml:space="preserve">
     <value>Registration code not found</value>
+  </data>
+  <data name="ReviewNotFound" xml:space="preserve">
+    <value>Review not found</value>
   </data>
   <data name="RoleAlreadyExists" xml:space="preserve">
     <value>Role already exists</value>

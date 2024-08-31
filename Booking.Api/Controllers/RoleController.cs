@@ -1,6 +1,6 @@
 ﻿using Booking.Application.Services;
 using Booking.Domain.Dto.Role;
-using Booking.Domain.Dto.RoomDto;
+using Booking.Domain.Dto.Room;
 using Booking.Domain.Dto.UserRole;
 using Booking.Domain.Entity;
 using Booking.Domain.Interfaces.Services;

@@ -13,8 +13,8 @@ namespace Booking.DAL.Configurations
             builder.Property(x => x.ComfortName).HasMaxLength(254);
             builder.Property(x => x.ComfortIcon).HasMaxLength(254).IsRequired();
 
-            builder.HasMany(x => x.Rooms)
-              .WithMany(x => x.RoomComfortIcons)
+            builder.HasMany<Room>()
+              .WithMany(x => x.RoomComfortIconTypes)
               .UsingEntity<RoomComfortIcon>(
               l => l.HasOne<Room>().WithMany().HasForeignKey(x => x.RoomId),
               l => l.HasOne<RoomComfortIconType>().WithMany().HasForeignKey(x => x.RoomComfortIconTypeId)

@@ -10,6 +10,8 @@ namespace Booking.Domain.Entity
     {
         public long Id { get; set; }
         public string BedTypeName { get; set; } = null!;
+        public int Adult { get; set; }
+        public int Children { get; set; }
         public List<Room> Rooms { get; set; } = null!;
     }
 }

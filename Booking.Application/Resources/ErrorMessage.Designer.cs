@@ -70,6 +70,15 @@ namespace Booking.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hotel already exists.
+        /// </summary>
+        public static string HotelAlreadyExists {
+            get {
+                return ResourceManager.GetString("HotelAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hotel not found.
         /// </summary>
         public static string HotelNotFound {
@@ -93,6 +102,15 @@ namespace Booking.Application.Resources {
         public static string InvalidClientRequest {
             get {
                 return ResourceManager.GetString("InvalidClientRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid parameters.
+        /// </summary>
+        public static string InvalidParameters {
+            get {
+                return ResourceManager.GetString("InvalidParameters", resourceCulture);
             }
         }
         
@@ -129,6 +147,15 @@ namespace Booking.Application.Resources {
         public static string RegistrationCodeNotFound {
             get {
                 return ResourceManager.GetString("RegistrationCodeNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Review not found.
+        /// </summary>
+        public static string ReviewNotFound {
+            get {
+                return ResourceManager.GetString("ReviewNotFound", resourceCulture);
             }
         }
         

@@ -11,11 +11,15 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Booking.Application.Resources;
 using Booking.Domain.Enum;
-using Booking.Domain.Dto.RoomDto;
+using Booking.Domain.Dto.Room;
 using Booking.Domain.Interfaces.Validations;
 using System.Runtime.CompilerServices;
 using AutoMapper;
 using Booking.Domain.Dto.User;
+using Booking.Domain.Dto.RoomImage;
+using Booking.Domain.Dto.Bed;
+using Booking.Domain.Dto.RoomComfort;
+using Booking.Domain.Dto.Hotel;
 
 namespace Booking.Application.Services
 {
@@ -39,167 +43,204 @@ namespace Booking.Application.Services
         }
 
         /// < inheritdoc />
-        public async Task<BaseResult<RoomDto>> CreatRoomAsync(CreateRoomDto dto)
+        public async Task<BaseResult<RoomResposeDto>> CreatRoomAsync(CreateRoomDto dto)
         {
-            try
+  
+            var hotel = await _hotelRepository.GetAll().FirstOrDefaultAsync(x => x.Id == dto.HotelId);
+            var room = await _roomRepository.GetAll().FirstOrDefaultAsync(x => x.RoomName == dto.RoomName);
+
+
+            if ( room != null )
             {
-                var hotel = await _hotelRepository.GetAll().FirstOrDefaultAsync(x => x.Id == dto.HotelId);
-                var room = await _roomRepository.GetAll().FirstOrDefaultAsync(x => x.RoomName == dto.RoomName);
-                var result = _roomValidator.CreateValidator(room, hotel);
-
-                if (!result.IsSuccess)
+                return new BaseResult<RoomResposeDto>()
                 {
-                    return new BaseResult<RoomDto>()
-                    {
-                        ErrorMessage = result.ErrorMessage,
-                        ErrorCode = result.ErrorCode,
-                    };
-                }
-
-                room = new Room()
-                {
-                    RoomName = dto.RoomName,
-                    RoomPrice = dto.RoomPrice,
-                    Logo = dto.Logo,
-                    Cancellation = dto.Cancellation,
-                    Guests = dto.Guests,
-                    HotelId = dto.HotelId,
-                };
-
-                await _roomRepository.CreateAsync(room);
-
-                return new BaseResult<RoomDto>()
-                {
-                    Data = _mapper.Map<RoomDto>(room),
-                };
-
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex, ex.Message);
-                return new BaseResult<RoomDto>()
-                {
-                    ErrorMessage = ErrorMessage.InternalServerError,
-                    ErrorCode = (int)ErrorCodes.InternalServerError
+                    ErrorMessage = ErrorMessage.RoomAlreadyExists,
+                    ErrorCode = (int)ErrorCodes.RoomAlreadyExists
                 };
             }
+
+            if (hotel == null)
+            {
+                return new BaseResult<RoomResposeDto>()
+                {
+                    ErrorMessage = ErrorMessage.HotelNotFound,
+                    ErrorCode = (int)ErrorCodes.HotelNotFound
+                };
+            }
+
+            room = new Room()
+            {
+                RoomName = dto.RoomName,
+                RoomPrice = dto.RoomPrice,
+                Cancellation = dto.CancellationPrice,
+                HotelId = dto.HotelId,
+            };
+
+            room = await _roomRepository.CreateAsync(room);
+            await _roomRepository.SaveChangesAsync();
+
+
+            return new BaseResult<RoomResposeDto>()
+            {
+                Data = _mapper.Map<RoomResposeDto>(room),
+            };
+
         }
 
         /// < inheritdoc />
-        public async Task<BaseResult<RoomDto>> DeleteRoomAsync(long roomId)
+        public async Task<BaseResult<RoomResposeDto>> DeleteRoomAsync(long roomId)
         {
-            try
+            var room = await _roomRepository.GetAll().FirstOrDefaultAsync(x => x.Id == roomId);
+            // var result = _roomValidator.ValidateOnNull(room);
+            //if (!result.IsSuccess)
+            //{
+            //    return new BaseResult<RoomDto>()
+            //    {
+            //        ErrorMessage = result.ErrorMessage,
+            //        ErrorCode = result.ErrorCode,
+            //    };
+            //}
+            if (room == null)
             {
-                var room = await _roomRepository.GetAll().FirstOrDefaultAsync(x => x.Id == roomId);
-                // var result = _roomValidator.ValidateOnNull(room);
-                //if (!result.IsSuccess)
-                //{
-                //    return new BaseResult<RoomDto>()
-                //    {
-                //        ErrorMessage = result.ErrorMessage,
-                //        ErrorCode = result.ErrorCode,
-                //    };
-                //}
-                if (room == null)
+                return new BaseResult<RoomResposeDto>()
                 {
-                    return new BaseResult<RoomDto>()
-                    {
-                        ErrorMessage = ErrorMessage.RoomNotFound,
-                        ErrorCode = (int)ErrorCodes.RoomNotFound,
-                    };
-                }
-
-                _roomRepository.Remove(room);
-                await _roomRepository.SaveChangesAsync();
-                return new BaseResult<RoomDto>()
-                {
-                    Data = _mapper.Map<RoomDto>(room)
-                };
-
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex, ex.Message);
-                return new BaseResult<RoomDto>()
-                {
-                    ErrorMessage = ErrorMessage.InternalServerError,
-                    ErrorCode = (int)ErrorCodes.InternalServerError
+                    ErrorMessage = ErrorMessage.RoomNotFound,
+                    ErrorCode = (int)ErrorCodes.RoomNotFound,
                 };
             }
+
+            _roomRepository.Remove(room);
+            await _roomRepository.SaveChangesAsync();
+
+            return new BaseResult<RoomResposeDto>()
+            {
+                Data = _mapper.Map<RoomResposeDto>(room)
+            };
         }
 
-        public Task<BaseResult<RoomDto>> GetRoomByIdAsync(long roomId)
+        public async Task<BaseResult<RoomDto>> GetRoomByIdAsync(long roomId)
         {
-            RoomDto? room;
-            try
+            if(roomId < 0)
             {
-                room = _roomRepository.GetAll()
-                    .Where(x => x.Id == roomId)
-                    .Select(x => new RoomDto(x.Id, x.RoomName, x.RoomPrice, x.Logo, x.Cancellation, x.Guests))
-                    .AsEnumerable()
-                    .FirstOrDefault(x => x.Id == roomId);
-
-                //room = await _roomRepository.GetAll()
-                //    .Select(x => new RoomDto(x.Id, x.RoomName, x.RoomPrice, x.Logo, x.Cancellation, x.Guests))
-                //    .FirstOrDefaultAsync(x => x.Id == roomId);
-                //rooms = await _roomRepository.GetAll()
-                //   .Where(x => x.Hotel.Id == hotelId)
-                //   .Select(x => new RoomDto(x.Id, x.RoomName, x.RoomPrice, x.Logo, x.Cancellation, x.Guests))
-                //   .ToArrayAsync();
-                //room = _roomRepository.GetAll().AsEnumerable()
-                //  .Select(x => new RoomDto(x.Id, x.RoomName, x.RoomPrice, x.Logo, x.Cancellation, x.Guests))
-                //  .FirstOrDefault(x => x.Id == roomId);
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex, ex.Message);
-                return Task.FromResult(new BaseResult<RoomDto>()
+                return new BaseResult<RoomDto>()
                 {
-                    ErrorMessage = ErrorMessage.InternalServerError,
-                    ErrorCode = (int)ErrorCodes.InternalServerError
-                });
+                    ErrorMessage = ErrorMessage.InvalidParameters,
+                    ErrorCode = (int)ErrorCodes.InvalidParameters
+                };
             }
+
+            var room = await _roomRepository.GetAll()
+               .Where(x => x.Id == roomId)
+               .Include(x => x.RoomComfortIconTypes)
+               .Include(x => x.RoomImages)
+               .Include(x => x.BedTypes)
+               .Select(x => new RoomDto
+               {
+                   Id = x.Id,
+                   RoomName = x.RoomName,
+                   Price = x.RoomPrice,
+                   CancelationPrice = x.Cancellation,
+                   Adults = x.BedTypes.Sum(x => x.Adult),
+                   Children = x.BedTypes.Sum(x => x.Children),
+                   Images = x.RoomImages.Select(x => new RoomImageDto
+                   {
+                       Id = x.Id,
+                       ImageName = x.ImageName
+                   }).ToList(),
+                   Beds = x.BedTypes.Select(x => new BedDto
+                   {
+                       Id = x.Id,
+                       BedName = x.BedTypeName,
+                       Adult = x.Adult,
+                       Children = x.Children
+                   }).ToList(),
+                   RoomComforts = x.RoomComfortIconTypes.Select(x => new RoomComfortDto
+                   {
+                       Id = x.Id,
+                       ComfortIcon = x.ComfortIcon,
+                       ComfortName = x.ComfortName
+                   }).ToList()
+               })
+               .FirstOrDefaultAsync();
+               
+
+            //var room = _roomRepository.GetAll()
+            //    .Where(x => x.Id == roomId)
+            //    .Select(x => new RoomDto(x.Id, x.RoomName, x.RoomPrice, x.CancellationPrice))
+            //    .AsEnumerable()
+            //    .FirstOrDefault(x => x.Id == roomId);
+
 
             if (room == null) 
             {
                 _logger.Warning( $"Room id:{roomId} not found");
-                return Task.FromResult(new BaseResult<RoomDto>()
+                return new BaseResult<RoomDto>()
                 {
                     ErrorMessage = ErrorMessage.RoomNotFound,
                     ErrorCode = (int)ErrorCodes.RoomNotFound
-                });
+                };
             }
 
-            return Task.FromResult(new BaseResult<RoomDto>()
+            return new BaseResult<RoomDto>()
             {
                 Data = room
-            });
+            };
+
+            //return Task.FromResult(new BaseResult<RoomDto>()
+            //{
+            //    Data = room
+            //});
         }
 
         /// < inheritdoc />
         public async Task<CollectionResult<RoomDto>> GetRoomsAsync(long hotelId)
         {
-            RoomDto[] rooms;
-            try
-            {
-                rooms = await _roomRepository.GetAll()
-                    .Where(x => x.Hotel.Id == hotelId)
-                    .Select(x => new RoomDto(x.Id, x.RoomName, x.RoomPrice, x.Logo, x.Cancellation, x.Guests))
-                    .ToArrayAsync();
-            }
-            catch (Exception ex) 
-            {
-                _logger.Error(ex, ex.Message);
-                return new CollectionResult<RoomDto>()
-                {
-                    ErrorMessage = ErrorMessage.InternalServerError,
-                    ErrorCode = (int)ErrorCodes.InternalServerError
-                };
-            }
 
-            if (!rooms.Any())
+            //var rooms = await _roomRepository.GetAll().Where(x => x.Hotel.Id == hotelId)
+            //    .Include(x => x.)
+
+            var rooms = await _roomRepository.GetAll()
+                .Where(x => x.HotelId == hotelId)
+                .Include(x => x.RoomComfortIconTypes)
+                .Include(x => x.RoomImages)
+                .Include(x => x.BedTypes)
+                .Select(x => new RoomDto
+                {
+                    Id = x.Id,
+                    RoomName = x.RoomName,
+                    Price = x.RoomPrice,
+                    CancelationPrice = x.Cancellation,
+                    Adults = x.BedTypes.Sum(x => x.Adult),
+                    Children = x.BedTypes.Sum( x => x.Children ),
+                    Images = x.RoomImages.Select(x => new RoomImageDto
+                    { 
+                        Id = x.Id, 
+                        ImageName = x.ImageName
+                    }).ToList(),
+                    Beds = x.BedTypes.Select(x => new BedDto 
+                    { 
+                        Id = x.Id, 
+                        BedName = x.BedTypeName, 
+                        Adult = x.Adult, 
+                        Children = x.Children 
+                    }).ToList(),
+                    RoomComforts = x.RoomComfortIconTypes.Select(x => new RoomComfortDto 
+                    { 
+                        Id = x.Id, 
+                        ComfortIcon = x.ComfortIcon, 
+                        ComfortName = x.ComfortName 
+                    }).ToList()
+                })
+                .ToListAsync();
+
+            //var rooms = await _roomRepository.GetAll()
+            //         .Where(x => x.Hotel.Id == hotelId)
+            //         .Select(x => new RoomDto(x.Id, x.RoomName, x.RoomPrice, x.Cancellation, x.Guests))
+            //         .ToArrayAsync();
+
+            if (rooms.Count == 0)
             {
-                _logger.Warning(ErrorMessage.RoomsNotFound, rooms.Length);
+                _logger.Warning(ErrorMessage.RoomsNotFound, rooms!.Count);
                 return new CollectionResult<RoomDto>()
                 {
                     ErrorMessage = ErrorMessage.RoomsNotFound,
@@ -210,11 +251,11 @@ namespace Booking.Application.Services
             return new CollectionResult<RoomDto>()
             {
                 Data = rooms,
-                Count = rooms.Length
+                Count = rooms.Count
             };
         }
 
-        public async Task<BaseResult<RoomDto>> UpdateRoomAsync(UpdateRoomDto dto)
+        public async Task<BaseResult<RoomResposeDto>> UpdateRoomAsync(UpdateRoomDto dto)
         {
             try
             {
@@ -222,42 +263,30 @@ namespace Booking.Application.Services
 
                 if (room == null)
                 {
-                    return new BaseResult<RoomDto>()
+                    return new BaseResult<RoomResposeDto>()
                     {
                         ErrorMessage = ErrorMessage.RoomNotFound,
                         ErrorCode = (int)ErrorCodes.RoomNotFound,
                     };
                 }
-                //TO DO ubrat ValidateOnNull
-               // var result = _roomValidator.ValidateOnNull(room);
-
-                //if (!result.IsSuccess)
-                //{
-                    //return new BaseResult<RoomDto>()
-                    //{
-                    //    ErrorMessage = result.ErrorMessage,
-                    //    ErrorCode = result.ErrorCode,
-                    //};
-                //}
              
                 room.RoomName = dto.RoomName;
                 room.RoomPrice = dto.RoomPrice;
-                room.Logo = dto.Logo;
                 room.Cancellation = dto.Cancellation;
-                room.Guests = dto.Guests;
+
 
                 var updatedRoom = _roomRepository.Update(room);
                 await _roomRepository.SaveChangesAsync();
 
-                return new BaseResult<RoomDto>()
+                return new BaseResult<RoomResposeDto>()
                 {
-                    Data = _mapper.Map<RoomDto>(updatedRoom)
+                    Data = _mapper.Map<RoomResposeDto>(updatedRoom)
                 };
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, ex.Message);
-                return new BaseResult<RoomDto>()
+                return new BaseResult<RoomResposeDto>()
                 {
                     ErrorMessage = ErrorMessage.InternalServerError,
                     ErrorCode = (int)ErrorCodes.InternalServerError

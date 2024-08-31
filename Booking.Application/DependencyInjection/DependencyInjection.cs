@@ -3,7 +3,7 @@ using Booking.Application.Mapping;
 using Booking.Application.Services;
 using Booking.Application.Validations;
 using Booking.Application.Validations.FluentValidations;
-using Booking.Domain.Dto.RoomDto;
+using Booking.Domain.Dto.Room;
 using Booking.Domain.Interfaces.Services;
 using Booking.Domain.Interfaces.Validations;
 using FluentValidation;
@@ -16,7 +16,7 @@ namespace Booking.Application.DependencyInjection
     {
         public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddAutoMapper(typeof(RoomMapping));
+            services.AddAutoMapper(typeof(RoomMapping), typeof(HotelMapping));
 
             var emailOptions = configuration.GetSection(nameof(EmailService));
 
@@ -44,7 +44,8 @@ namespace Booking.Application.DependencyInjection
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IRoleService, RoleService>();
-            services.AddScoped<ITopHotelsService, TopHotelsService>();
+            services.AddScoped<IHotelService, HotelService>();
+            services.AddScoped<IReviewService, ReviewService>();
         }
     }
 

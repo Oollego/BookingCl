@@ -181,120 +181,122 @@ namespace Booking.DAL.Configurations
                     CountryName = "Malta",
                     FlagIcon = "malta.png"
                 },
+                
                 new Country()
                 {
                     Id = 28,
-                    CountryName = "Republic of Moldova",
-                    FlagIcon = "moldova.png"
-                },
-                new Country()
-                {
-                    Id = 29,
                     CountryName = "Monaco",
                     FlagIcon = "monaco.png"
                 },
                 new Country()
                 {
-                    Id = 30,
+                    Id = 29,
                     CountryName = "Montenegro",
                     FlagIcon = "montenegro.png"
                 },
                 new Country()
                 {
-                    Id = 31,
+                    Id = 30,
                     CountryName = "Netherlands",
                     FlagIcon = "netherlands.png"
                 },
                 new Country()
                 {
-                    Id = 32,
+                    Id = 31,
                     CountryName = "North Macedonia",
                     FlagIcon = "north_macedonia.png"
                 },
                 new Country()
                 {
-                    Id = 33,
+                    Id = 32,
                     CountryName = "Norway",
                     FlagIcon = "norway.png"
                 },
                 new Country()
                 {
-                    Id = 34,
+                    Id = 33,
                     CountryName = "Poland",
                     FlagIcon = "poland.png"
                 },
                 new Country()
                 {
-                    Id = 35,
+                    Id = 34,
                     CountryName = "Portugal",
                     FlagIcon = "portugal.png"
                 },
                 new Country()
                 {
-                    Id = 36,
+                    Id = 35,
                     CountryName = "Romania",
                     FlagIcon = "romania.png"
                 },
                 new Country()
                 {
-                    Id = 37,
+                    Id = 36,
                     CountryName = "San Marino",
                     FlagIcon = "san_marino.png"
                 },
                 new Country()
                 {
-                    Id = 38,
+                    Id = 37,
                     CountryName = "Slovak Republic",
                     FlagIcon = "slovak_republic.png"
                 },
                 new Country()
                 {
-                    Id = 39,
+                    Id = 38,
                     CountryName = "Slovenia",
                     FlagIcon = "slovenia.png"
                 },
                 new Country()
                 {
-                    Id = 40,
+                    Id = 39,
                     CountryName = "Spain",
                     FlagIcon = "spain.png"
                 },
                 new Country()
                 {
-                    Id = 41,
+                    Id = 40,
                     CountryName = "Sweden",
                     FlagIcon = "sweden.png"
                 },
                 new Country()
                 {
-                    Id = 42,
+                    Id = 41,
                     CountryName = "Switzerland",
                     FlagIcon = "switzerland.png"
                 },
                 new Country()
                 {
-                    Id = 43,
+                    Id = 42,
                     CountryName = "Türkiye",
                     FlagIcon = "turkiye.png"
                 },
                 new Country()
                 {
-                    Id = 44,
+                    Id = 43,
                     CountryName = "Ukraine",
                     FlagIcon = "ukraine.png"
                 },
                 new Country()
                 {
-                    Id = 45,
+                    Id = 44,
                     CountryName = "United Kingdom",
                     FlagIcon = "united_kingdom.png"
                 },
                 new Country()
                 {
+                    Id = 45,
+                    CountryName = "Vatican",
+                    FlagIcon = "vatican.png"
+                },
+
+                new Country()
+                {
                     Id = 46,
-                    CountryName = "Vatican City",
-                    FlagIcon = "vatican_city.png"
-                }
+                    CountryName = "Republic of Moldova",
+                    FlagIcon = "moldova.png"
+                },
             });
         }
     }

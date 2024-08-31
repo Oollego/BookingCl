@@ -25,7 +25,7 @@ namespace Booking.Api
             }).AddJwtBearer(o =>
             {
                 var options = builder.Configuration.GetSection(JwtSettings.DefaultSection).Get<JwtSettings>();
-                var jwtKey = options.JwtKey;
+                var jwtKey = options!.JwtKey;
                 var issuer = options.Issuer;
                 var audience = options.Audience;
                 o.Authority = options.Authority;
@@ -49,14 +49,14 @@ namespace Booking.Api
         /// <param name="services"></param>
         public static void AddSwagger(this IServiceCollection services)
         {
-            services.AddApiVersioning()
-                .AddApiExplorer(options =>
-                {
-                    options.DefaultApiVersion = new ApiVersion(1, 0);
-                    options.GroupNameFormat = "'v'VVV";
-                    options.SubstituteApiVersionInUrl = true;
-                    options.AssumeDefaultVersionWhenUnspecified = true;
-                });
+            services.AddApiVersioning();
+                //.AddApiExplorer(options =>
+                //{
+                //    options.DefaultApiVersion = new ApiVersion(1, 0);
+                //    options.GroupNameFormat = "'v'VVV";
+                //    options.SubstituteApiVersionInUrl = true;
+                //    options.AssumeDefaultVersionWhenUnspecified = true;
+                //});
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(options =>
             {
@@ -66,22 +66,22 @@ namespace Booking.Api
                     Title = "Boooking.API",
                     Description = "Version 1.0",
                     Contact = new OpenApiContact()
-                    { 
-                        Name = "Oleg",
-                        Email = "E-mail"
-                    }
-                });
-                options.SwaggerDoc("v2", new OpenApiInfo()
-                {
-                    Version = "v2",
-                    Title = "Boooking.API",
-                    Description = "Version 2.0",
-                    Contact = new OpenApiContact()
                     {
                         Name = "Oleg",
                         Email = "E-mail"
                     }
                 });
+                //options.SwaggerDoc("v2", new OpenApiInfo()
+                //{
+                //    Version = "v2",
+                //    Title = "Boooking.API",
+                //    Description = "Version 2.0",
+                //    Contact = new OpenApiContact()
+                //    {
+                //        Name = "Oleg",
+                //        Email = "E-mail"
+                //    }
+                //});
 
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {

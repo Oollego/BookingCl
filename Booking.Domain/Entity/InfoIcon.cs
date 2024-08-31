@@ -9,7 +9,6 @@ namespace Booking.Domain.Entity
     public class InfoIcon
     {
         public long Id { get; set; }
-        public string IconName { get; set; } = null!;
         public string IconFileName { get; set; } = null!;
         public List<HotelInfoCell> HotelInfoCells { get; set; } = null!;
     }

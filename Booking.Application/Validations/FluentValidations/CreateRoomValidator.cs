@@ -1,4 +1,4 @@
-﻿using Booking.Domain.Dto.RoomDto;
+﻿using Booking.Domain.Dto.Room;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,9 @@ namespace Booking.Application.Validations.FluentValidations
         public CreateRoomValidator() 
         {
             RuleFor(x => x.RoomName).NotEmpty().MaximumLength(254);
-            RuleFor(x => x.Guests).NotEmpty();
+            RuleFor(x => x.RoomPrice).NotEmpty();
+
+            //RuleFor(x => x.Guests).NotEmpty();
         }
 
     }

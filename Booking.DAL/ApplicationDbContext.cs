@@ -24,7 +24,7 @@ namespace Booking.DAL
         {
             optionsBuilder.LogTo(message => System.Diagnostics.Debug.WriteLine(message), LogLevel.Information);
             optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
-            //optionsBuilder.AddInterceptors(new DateInterceptor());
+            optionsBuilder.AddInterceptors(new ReviewInterceptor(), new RoomInterceptor());
             
         }
 

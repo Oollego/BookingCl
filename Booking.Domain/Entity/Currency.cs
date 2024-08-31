@@ -11,7 +11,8 @@ namespace Booking.Domain.Entity
     {
         public string CurrencyCode { get; set; } = null!;
         public string CurrencyName { get; set; } = null!;
-        public string CurrencyLetter {  get; set; } = null!;
+        public string CurrencyChar {  get; set; } = null!;
+        public double ExchangeRate { get; set; }
         public List<UserProfile> UserProfiles { get; set; } = null!;
     }
 }

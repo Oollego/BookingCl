@@ -1,4 +1,4 @@
-﻿using Booking.Domain.Dto.RoomDto;
+﻿using Booking.Domain.Dto.Room;
 using FluentValidation;
 using System;
 using System.Collections.Generic;

@@ -12,14 +12,12 @@ namespace Booking.Domain.Entity
         public long Id { get; set; }
         public string RoomName { get; set; } = null!;
         public decimal RoomPrice { get; set; }
-        public string Logo {  get; set; } = null!;
         public decimal Cancellation { get; set; }
-        public int Guests { get; set; }
         public long HotelId { get; set; }
         public Hotel Hotel { get; set; } = null!;
-        public List<RoomPhoto> RoomPhotos { get; set; } = null!;
+        public List<RoomImage> RoomImages { get; set; } = null!;
         public List<BedType> BedTypes { get; set; } = null!;
         public List<Book> Books { get; set; } = null!;
-        public List<RoomComfortIconType> RoomComfortIcons { get; set; } = null!;
+        public List<RoomComfortIconType> RoomComfortIconTypes { get; set; } = null!;
     }
 }

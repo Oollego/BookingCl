@@ -11,6 +11,5 @@ namespace Booking.Domain.Entity
         public long Id { get; set; }
         public string ComfortName { get; set; } = null!;
         public string ComfortIcon { get; set; } = null!;
-        public List<Room> Rooms { get; set; } = null!;
     }
 }

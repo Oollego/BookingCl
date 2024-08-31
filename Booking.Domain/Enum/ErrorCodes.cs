@@ -24,13 +24,14 @@ namespace Booking.Domain.Enum
         EmailIsNotCorrect = 23,
         RegistrationCodeNotFound = 24,
         UserIsNotMatched = 25,
+        InvalidParameters = 26,
 
         RoleAlreadyExists = 31,
         RoleNotFound = 32,
         
+        HotelNotFound = 41,
+        HotelAlreadyExists = 42,
 
-        HotelNotFound = 41
-
-
+        ReviewNotFound = 51
     }
 }

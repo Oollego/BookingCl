@@ -15,7 +15,7 @@ namespace Booking.DAL.Configurations
         {
             builder.ToTable("pay_methods");
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
-            builder.Property(x => x.CardNumber).HasMaxLength(15).IsRequired();
+            builder.Property(x => x.CardNumber).HasMaxLength(19).IsRequired();
             builder.Property(x => x.CardDate).IsRequired();
             builder.Property(x => x.CardTypeId).IsRequired();
 
@@ -23,6 +23,33 @@ namespace Booking.DAL.Configurations
                 .WithOne(x => x.PayMethod)
                 .HasForeignKey(x => x.PayMethodId)
                 .HasPrincipalKey(x => x.Id);
+
+            builder.HasData(new List<PayMethod>
+            {
+                new PayMethod
+                {
+                    Id = 1,
+                    CardNumber = "1111 2222 3333 4444",
+                    CardDate = DateTime.Now.AddDays(-10),
+                    CardTypeId = 1
+                },
+
+                new PayMethod
+                {
+                    Id = 2,
+                    CardNumber = "2222 2222 3333 4444",
+                    CardDate = DateTime.Now.AddDays(-3),
+                    CardTypeId = 2
+                },
+                new PayMethod
+                {
+                    Id = 3,
+                    CardNumber = "3333 2222 3333 4444",
+                    CardDate = DateTime.Now.AddDays(-5),
+                    CardTypeId = 1
+                },
+
+            });
         }
     }
 }
