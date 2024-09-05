@@ -14,6 +14,7 @@ namespace Booking.DAL.Configurations
         public void Configure(EntityTypeBuilder<TravelReason> builder)
         {
             builder.ToTable("travel_reasons");
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.Reason).IsRequired().HasMaxLength(254);
 

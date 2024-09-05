@@ -1,6 +1,7 @@
 ﻿using Booking.Domain.Entity;
 using Booking.Domain.Interfaces.Repositories;
 using Booking.Domain.Interfaces.UnitsOfWork;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace Booking.DAL.UnitOfWork
     {
         public IBaseRepository<Hotel> Hotels { get; set; } = null!;
         public IBaseRepository<HotelData> HotelsData { get; set; } = null!;
-
+        
         private readonly ApplicationDbContext _context;
 
         public HotelUnitOfWork(ApplicationDbContext context, IBaseRepository<Hotel> hotels,

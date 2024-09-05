@@ -27,7 +27,14 @@ namespace Booking.DAL.Configurations
             for( int i = 1; i <= 15; i++ )
             {
                 int j = 1;
-                if(i % 2 == 0)  j = 4;
+                if( i == 1)
+                {
+                    j = 6;
+                }
+                else
+                {
+                    if (i % 2 == 0) j = 3;
+                }
                 
                 for(; j <= 58; j++ )
                 {

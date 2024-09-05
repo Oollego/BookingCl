@@ -14,6 +14,7 @@ namespace Booking.DAL.Configurations
         public void Configure(EntityTypeBuilder<NearStation> builder)
         {
             builder.ToTable("near_stations");
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.Distance).IsRequired();
             builder.Property(x => x.DistanceMetric).HasDefaultValue(false);
             builder.Property(x => x.NearPlaceNameId).IsRequired();

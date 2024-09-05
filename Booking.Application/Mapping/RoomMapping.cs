@@ -9,7 +9,7 @@ namespace Booking.Application.Mapping
         public RoomMapping() 
         { 
             CreateMap<Room, UpdateRoomDto>().ReverseMap();
-            CreateMap<Room, RoomResposeDto>().ReverseMap();
+            CreateMap<Room, RoomResponseDto>().ReverseMap();
         }
     }
 }

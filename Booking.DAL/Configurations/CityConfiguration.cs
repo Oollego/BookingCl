@@ -9,6 +9,7 @@ namespace Booking.DAL.Configurations
         public void Configure(EntityTypeBuilder<City> builder)
         {
             builder.ToTable("cities");
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.CityName).HasMaxLength(254).IsRequired();
             builder.Property(x => x.AirPortName).HasMaxLength(254).HasDefaultValue("");

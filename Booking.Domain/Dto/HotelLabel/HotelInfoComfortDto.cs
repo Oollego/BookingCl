@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Booking.Domain.Dto.HotelComfort
 {
-    public class HotelInfoComfortDto
+    public class HotelInfoLabelDto
     {
-        public string ComfortName { get; set; } = null!;
-        public string ComfortIcon { get; set; } = null!;
+        public string LabelName { get; set; } = null!;
+        public string LabelIcon { get; set; } = null!;
     }
 }

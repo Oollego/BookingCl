@@ -36,7 +36,7 @@ namespace Booking.Api.Middlewares
             var responce = exception switch
             {
                 ApplicationException _ => new BaseResult() { ErrorMessage = exception.Message, ErrorCode = (int)HttpStatusCode.Unauthorized },
-                _ => new BaseResult() { ErrorMessage = "Internal srver error. Please retry later", ErrorCode = (int)HttpStatusCode.InternalServerError}
+                _ => new BaseResult() { ErrorMessage = "Internal server error. Please retry later", ErrorCode = (int)HttpStatusCode.InternalServerError}
             };
             //ApplicationException _ => new BaseResult() { ErrorMessage = exception.Message, ErrorCode = (int)HttpStatusCode.InternalServerError }
             httpContext.Response.ContentType = "application/json";

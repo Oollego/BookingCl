@@ -10,6 +10,7 @@ namespace Booking.DAL.Configurations
         public void Configure(EntityTypeBuilder<UserProfile> builder)
         {
             builder.ToTable("user_profiles");
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.UserName).HasMaxLength(100);
             builder.Property(x => x.UserSurname).HasMaxLength(100);

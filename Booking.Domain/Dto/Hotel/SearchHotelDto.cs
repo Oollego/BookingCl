@@ -14,12 +14,15 @@ namespace Booking.Domain.Dto.Hotel
         public int Adults { get; set; }
         public int Children { get; set; }
         public int Rooms { get; set; }
-        public List<int> Stars { get; set; } = null!;
-        public List<int> Rating { get; set; } = null!;
-        public List<long> Popular { get; set; } = null!;
-        public List<long> Facilities { get; set; } = null!;
-        public List<long> TypeOfHotel { get; set; } = null!;
-        public List<long> ChainHotels { get; set; } = null!;
+        public int PageNumber { get; set; }
+        public int PageQty { get; set; }
+        public List<int>? Stars { get; set; } = null!;
+        public List<double>? Rating { get; set; } = null!;
+        public List<long>? HotelLabels { get; set; } = null!;
+        public List<long>? NearPlaces { get; set; } = null!;
+        public List<long>? Facilities { get; set; } = null!;
+        public List<long>? HotelTypes { get; set; } = null!;
+        public List<long>? HotelChains { get; set; } = null!;
 
     }
 }

@@ -43,7 +43,7 @@ namespace Booking.Application.Services
         }
 
         /// < inheritdoc />
-        public async Task<BaseResult<RoomResposeDto>> CreatRoomAsync(CreateRoomDto dto)
+        public async Task<BaseResult<RoomResponseDto>> CreatRoomAsync(CreateRoomDto dto)
         {
   
             var hotel = await _hotelRepository.GetAll().FirstOrDefaultAsync(x => x.Id == dto.HotelId);
@@ -52,7 +52,7 @@ namespace Booking.Application.Services
 
             if ( room != null )
             {
-                return new BaseResult<RoomResposeDto>()
+                return new BaseResult<RoomResponseDto>()
                 {
                     ErrorMessage = ErrorMessage.RoomAlreadyExists,
                     ErrorCode = (int)ErrorCodes.RoomAlreadyExists
@@ -61,7 +61,7 @@ namespace Booking.Application.Services
 
             if (hotel == null)
             {
-                return new BaseResult<RoomResposeDto>()
+                return new BaseResult<RoomResponseDto>()
                 {
                     ErrorMessage = ErrorMessage.HotelNotFound,
                     ErrorCode = (int)ErrorCodes.HotelNotFound
@@ -80,15 +80,15 @@ namespace Booking.Application.Services
             await _roomRepository.SaveChangesAsync();
 
 
-            return new BaseResult<RoomResposeDto>()
+            return new BaseResult<RoomResponseDto>()
             {
-                Data = _mapper.Map<RoomResposeDto>(room),
+                Data = _mapper.Map<RoomResponseDto>(room),
             };
 
         }
 
         /// < inheritdoc />
-        public async Task<BaseResult<RoomResposeDto>> DeleteRoomAsync(long roomId)
+        public async Task<BaseResult<RoomResponseDto>> DeleteRoomAsync(long roomId)
         {
             var room = await _roomRepository.GetAll().FirstOrDefaultAsync(x => x.Id == roomId);
             // var result = _roomValidator.ValidateOnNull(room);
@@ -102,7 +102,7 @@ namespace Booking.Application.Services
             //}
             if (room == null)
             {
-                return new BaseResult<RoomResposeDto>()
+                return new BaseResult<RoomResponseDto>()
                 {
                     ErrorMessage = ErrorMessage.RoomNotFound,
                     ErrorCode = (int)ErrorCodes.RoomNotFound,
@@ -112,9 +112,9 @@ namespace Booking.Application.Services
             _roomRepository.Remove(room);
             await _roomRepository.SaveChangesAsync();
 
-            return new BaseResult<RoomResposeDto>()
+            return new BaseResult<RoomResponseDto>()
             {
-                Data = _mapper.Map<RoomResposeDto>(room)
+                Data = _mapper.Map<RoomResponseDto>(room)
             };
         }
 
@@ -255,7 +255,7 @@ namespace Booking.Application.Services
             };
         }
 
-        public async Task<BaseResult<RoomResposeDto>> UpdateRoomAsync(UpdateRoomDto dto)
+        public async Task<BaseResult<RoomResponseDto>> UpdateRoomAsync(UpdateRoomDto dto)
         {
             try
             {
@@ -263,7 +263,7 @@ namespace Booking.Application.Services
 
                 if (room == null)
                 {
-                    return new BaseResult<RoomResposeDto>()
+                    return new BaseResult<RoomResponseDto>()
                     {
                         ErrorMessage = ErrorMessage.RoomNotFound,
                         ErrorCode = (int)ErrorCodes.RoomNotFound,
@@ -278,15 +278,15 @@ namespace Booking.Application.Services
                 var updatedRoom = _roomRepository.Update(room);
                 await _roomRepository.SaveChangesAsync();
 
-                return new BaseResult<RoomResposeDto>()
+                return new BaseResult<RoomResponseDto>()
                 {
-                    Data = _mapper.Map<RoomResposeDto>(updatedRoom)
+                    Data = _mapper.Map<RoomResponseDto>(updatedRoom)
                 };
             }
             catch (Exception ex)
             {
                 _logger.Error(ex, ex.Message);
-                return new BaseResult<RoomResposeDto>()
+                return new BaseResult<RoomResponseDto>()
                 {
                     ErrorMessage = ErrorMessage.InternalServerError,
                     ErrorCode = (int)ErrorCodes.InternalServerError

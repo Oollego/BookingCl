@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Booking.Domain.Dto.Room
 {
-    public class RoomResposeDto
+    public class RoomResponseDto
     {
         public long Id { get; set; }
         public string RoomName { get; set; } = null!;

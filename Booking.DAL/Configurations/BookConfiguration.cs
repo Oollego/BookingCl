@@ -14,6 +14,7 @@ namespace Booking.DAL.Configurations
         public void Configure(EntityTypeBuilder<Book> builder)
         {
             builder.ToTable("books");
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.BookComment).HasMaxLength(1500).HasDefaultValue("");
             builder.Property(x => x.IsPhoneCall).HasDefaultValue(false);

@@ -9,6 +9,7 @@ namespace Booking.DAL.Configurations
         public void Configure(EntityTypeBuilder<Country> builder)
         {
             builder.ToTable("countries");
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.CountryName).HasMaxLength(254).IsRequired();
 

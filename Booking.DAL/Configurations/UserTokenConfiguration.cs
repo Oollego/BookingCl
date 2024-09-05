@@ -14,6 +14,7 @@ namespace Booking.DAL.Configurations
         public void Configure(EntityTypeBuilder<UserToken> builder)
         {
             builder.ToTable("user_tokens");
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.RefreshToken).IsRequired();
             builder.Property(x => x.RefreshTokenExpiryTime).IsRequired();

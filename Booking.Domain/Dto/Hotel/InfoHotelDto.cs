@@ -20,7 +20,7 @@ namespace Booking.Domain.Dto.Hotel
         public double Rating { get; set; }
         public string CurrencyChar { get; set; } = DefaultValues.CurrancyCharUAH;
         public decimal CheapestRoom { get; set; }
-        public List<HotelInfoComfortDto> HotelComfort { get; set; } = null!;
+        public List<HotelInfoLabelDto> HotelLabels { get; set; } = null!;
         public ScoreDto Score { get; set; } = null!;
         public List<string> Images { get; set; } = null!;
         public List<FacilityInfoDto> Facilities { get; set; } = null!;

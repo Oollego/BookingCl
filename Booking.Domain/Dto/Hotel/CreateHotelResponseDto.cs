@@ -19,5 +19,7 @@ namespace Booking.Domain.Dto.Hotel
         public int FixedDays { get; set; }
         public bool IsPet { get; set; }
         public long CityId { get; set; }
+        public long HotelTypeId { get; set; }
+        public long HotelChainId { get; set; }
     }
 }

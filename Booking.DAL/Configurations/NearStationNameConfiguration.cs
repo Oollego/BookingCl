@@ -14,6 +14,7 @@ namespace Booking.DAL.Configurations
         public void Configure(EntityTypeBuilder<NearStationName> builder)
         {
             builder.ToTable("near_place_names");
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.Name).IsRequired().HasMaxLength(254);
             builder.Property(x => x.Icon).HasMaxLength(254);
 

@@ -10,5 +10,6 @@ namespace Booking.Domain.Entity
     {
         public long Id { get; set; }
         public string HotelChainName { get; set; } = null!;
+        public List<Hotel> Hotels { get; set; } = null!;
     }
 }

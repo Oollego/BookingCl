@@ -9,6 +9,7 @@ namespace Booking.DAL.Configurations
         public void Configure(EntityTypeBuilder<RoomImage> builder)
         {
             builder.ToTable("room_images");
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.ImageName).IsRequired().HasMaxLength(254);
             builder.Property(x => x.RoomId).IsRequired();

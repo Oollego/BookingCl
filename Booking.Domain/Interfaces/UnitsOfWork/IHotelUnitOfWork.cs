@@ -1,5 +1,6 @@
 ﻿using Booking.Domain.Entity;
 using Booking.Domain.Interfaces.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;

@@ -14,6 +14,7 @@ namespace Booking.DAL.Configurations
         public void Configure(EntityTypeBuilder<Role> builder)
         {
             builder.ToTable("roles");
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.RoleName).IsRequired().HasMaxLength(50);
             builder.HasData(new List<Role>()

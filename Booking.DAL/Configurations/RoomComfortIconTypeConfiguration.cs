@@ -9,6 +9,7 @@ namespace Booking.DAL.Configurations
         public void Configure(EntityTypeBuilder<RoomComfortIconType> builder)
         {
             builder.ToTable("room_comfort_icon_types");
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.ComfortName).HasMaxLength(254);
             builder.Property(x => x.ComfortIcon).HasMaxLength(254).IsRequired();

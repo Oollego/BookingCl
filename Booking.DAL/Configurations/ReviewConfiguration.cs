@@ -9,6 +9,7 @@ namespace Booking.DAL.Configurations
         public void Configure(EntityTypeBuilder<Review> builder)
         {
             builder.ToTable("reviews");
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.ReviewComment).HasMaxLength(1500).HasDefaultValue("");
             builder.Property(x => x.HotelId).IsRequired();

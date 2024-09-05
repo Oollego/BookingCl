@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Booking.Domain.Entity
 {
-    public class HotelComfortIconType
+    public class HotelLabelType
     {
         public long Id { get; set; }
-        public string ComfortName { get; set; } = null!;
-        public string ComfortIcon { get; set; } = null!;
+        public string LabelName { get; set; } = null!;
+        public string LabelIcon { get; set; } = null!;
         public List<Hotel> Hotels { get; set; } = null!;
     }
 }

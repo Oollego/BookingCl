@@ -3,6 +3,7 @@ using Booking.Application.Services;
 using Booking.Domain.Dto.Hotel;
 using Booking.Domain.Dto.Review;
 using Booking.Domain.Dto.Room;
+using Booking.Domain.Dto.SearchFilter;
 using Booking.Domain.Interfaces.Services;
 using Booking.Domain.Result;
 using Microsoft.AspNetCore.Mvc;
@@ -64,20 +65,28 @@ namespace Booking.Api.Controllers
             return BadRequest(response);
         }
 
-        [HttpPut("info/search_hotel")]
+        [HttpPatch("info/search_hotel")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<BaseResult<HotelDto>>> SearchHotels([FromBody] SearchHotelDto dto)
         {
-            var user = HttpContext.User.Identity as ClaimsIdentity;
-            string? email = null;
-
-            if (user is not null && user.IsAuthenticated)
-            {
-                email = user.Claims.First().Value;
-            }
 
             var response = await _hotelService.SearchHotelAsync(dto);
+
+            if (response.IsSuccess)
+            {
+                return Ok(response);
+            }
+            return BadRequest(response);
+        }
+
+        [HttpPatch("info/search_filters")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<BaseResult<SearchFilterResponseDto>>> SearchFilters([FromBody] SearchFilterDto dto)
+        {
+ 
+            var response = await _hotelService.GetSearchFilters(dto);
 
             if (response.IsSuccess)
             {

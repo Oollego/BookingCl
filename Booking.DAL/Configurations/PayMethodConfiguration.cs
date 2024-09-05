@@ -14,6 +14,7 @@ namespace Booking.DAL.Configurations
         public void Configure(EntityTypeBuilder<PayMethod> builder)
         {
             builder.ToTable("pay_methods");
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.CardNumber).HasMaxLength(19).IsRequired();
             builder.Property(x => x.CardDate).IsRequired();

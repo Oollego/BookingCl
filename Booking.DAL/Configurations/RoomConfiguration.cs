@@ -9,6 +9,7 @@ namespace Booking.DAL.Configurations
         public void Configure(EntityTypeBuilder<Room> builder)
         {
             builder.ToTable("rooms");
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.RoomName).HasMaxLength(254);
             builder.Property(x => x.Cancellation).HasDefaultValue(0).HasPrecision(10, 2);

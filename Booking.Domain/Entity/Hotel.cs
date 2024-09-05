@@ -2,7 +2,7 @@
 
 namespace Booking.Domain.Entity
 {
-    public class Hotel: IEntityId<long>
+    public class Hotel
     {
         public long Id { get; set; }
         public string HotelName { get; set; } = null!;
@@ -15,15 +15,17 @@ namespace Booking.Domain.Entity
         public int FixedDays { get; set; }
         public bool IsPet { get; set; }
         public long CityId { get; set; }
-        public string HotelTypeId { get; set; } = null!;
-        public string? HotelChainId { get; set; } = null!;
         public City City { get; set; } = null!;
+        public long HotelTypeId { get; set; }
+        public HotelType HotelType { get; set; } = null!;
+        public long HotelChainId { get; set; }
+        public HotelChain HotelChain { get; set; } = null!;
         public List<Room> Rooms { get; set; } = null!;
         public List<HotelInfoCell> HotelInfoCells { get; set; } = null!;
         public List<NearStation> NearStations { get; set; } = null!;
         public List<Review> Reviews { get; set; } = null!;
         public List<Facility> Facilities { get; set; } = null!;
-        public List<HotelComfortIconType> HotelComfortIconTypes { get; set; } = null!;
+        public List<HotelLabelType> HotelLabelTypes { get; set; } = null!;
         public HotelData HotelData { get; set; } = null!;
     }
 }

@@ -14,6 +14,7 @@ namespace Booking.DAL.Configurations
         public void Configure(EntityTypeBuilder<HotelInfoCell> builder)
         {
             builder.ToTable("hotel_info_cells");
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.TextLine_1).HasMaxLength(254).IsRequired();
             builder.Property(x => x.TextLine_2).HasMaxLength(254).HasDefaultValue("");

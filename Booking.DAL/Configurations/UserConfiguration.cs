@@ -15,6 +15,7 @@ namespace Booking.DAL.Configurations
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.ToTable("users");
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.UserEmail).HasMaxLength(254);
             builder.Property(x => x.PasswordSalt).HasMaxLength(128);

@@ -9,6 +9,7 @@ namespace Booking.DAL.Configurations
         public void Configure(EntityTypeBuilder<BedType> builder)
         {
             builder.ToTable("bed_types");
+            builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.BedTypeName).IsRequired().HasMaxLength(254);
             builder.Property(x => x.Adult).IsRequired();

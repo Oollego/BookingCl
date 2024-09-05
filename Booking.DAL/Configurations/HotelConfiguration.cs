@@ -22,6 +22,8 @@ namespace Booking.DAL.Configurations
             builder.Property(x => x.FixedDays).HasDefaultValue(0);
             builder.Property(x => x.IsPet).HasDefaultValue(false);
             builder.Property(x => x.CityId).IsRequired();
+            builder.Property(x => x.HotelChainId).HasDefaultValue(1);
+            builder.Property(x => x.HotelTypeId).IsRequired();
             builder.ToTable(t => t.HasCheckConstraint("Stars", "Stars >= 0 AND Stars <= 5"));
 
             builder.HasMany<Room>(x => x.Rooms)
@@ -63,6 +65,8 @@ namespace Booking.DAL.Configurations
                     Description = "Hotel Azure offers comfort with a view of the Mediterranean Sea.",
                     Stars = 4,
                     FixedDays = 5,
+                    HotelTypeId = 1,
+                    HotelChainId = 8,
                     IsPet = true,
                     CityId = 197
                 },
@@ -77,6 +81,8 @@ namespace Booking.DAL.Configurations
                     Description = "Greenwood Hotel is a perfect escape to nature in Spain's capital.",
                     Stars = 5,
                     FixedDays = 3,
+                    HotelTypeId = 2,
+                    HotelChainId = 3,
                     IsPet = false,
                     CityId = 196
                 },
@@ -91,6 +97,8 @@ namespace Booking.DAL.Configurations
                     Description = "Urban Central combines luxury with the bustling energy of Berlin.",
                     Stars = 5,
                     FixedDays = 2,
+                    HotelTypeId = 3,
+                    HotelChainId = 2,
                     IsPet = false,
                     CityId = 81
                 },
@@ -105,6 +113,8 @@ namespace Booking.DAL.Configurations
                     Description = "Mountain Retreat offers stunning views of the Zugspitze.",
                     Stars = 4,
                     FixedDays = 4,
+                    HotelTypeId = 4,
+                    HotelChainId = 4,
                     IsPet = true,
                     CityId = 84
                 },
@@ -119,6 +129,8 @@ namespace Booking.DAL.Configurations
                     Description = "Coastal Escape provides luxury on the famous French Riviera.",
                     Stars = 4,
                     FixedDays = 7,
+                    HotelTypeId = 5,
+                    HotelChainId = 7,
                     IsPet = true,
                     CityId = 218
                 },
@@ -133,6 +145,8 @@ namespace Booking.DAL.Configurations
                     Description = "Hotel Royal combines modern luxury with Ukrainian hospitality.",
                     Stars = 5,
                     FixedDays = 6,
+                    HotelTypeId = 6,
+                    HotelChainId = 6,
                     IsPet = true,
                     CityId = 216
                 },
@@ -147,6 +161,8 @@ namespace Booking.DAL.Configurations
                     Description = "Riverside Hotel is a tranquil escape in the city of Dnipro.",
                     Stars = 4,
                     FixedDays = 5,
+                    HotelTypeId = 7,
+                    HotelChainId = 5,
                     IsPet = false,
                     CityId = 220
                 },
@@ -161,6 +177,8 @@ namespace Booking.DAL.Configurations
                     Description = "Central Park Hotel offers luxury and comfort in the capital.",
                     Stars = 5,
                     FixedDays = 3,
+                    HotelTypeId = 8,
+                    HotelChainId = 2,
                     IsPet = true,
                     CityId = 216
                 },
@@ -175,6 +193,8 @@ namespace Booking.DAL.Configurations
                     Description = "Seaside Hotel offers breathtaking views of the Mediterranean.",
                     Stars = 4,
                     FixedDays = 6,
+                    HotelTypeId = 9,
+                    HotelChainId = 2,
                     IsPet = false,
                     CityId = 199
                 },
@@ -189,6 +209,8 @@ namespace Booking.DAL.Configurations
                     Description = "The Grand Hotel blends historic charm with modern luxury.",
                     Stars = 5,
                     FixedDays = 4,
+                    HotelTypeId = 2,
+                    HotelChainId = 9,
                     IsPet = true,
                     CityId = 81
                 },
@@ -203,6 +225,8 @@ namespace Booking.DAL.Configurations
                     Description = "City Palace offers luxury accommodation in a cultural setting.",
                     Stars = 5,
                     FixedDays = 2,
+                    HotelTypeId = 4,
+                    HotelChainId = 3,
                     IsPet = true,
                     CityId = 216
                 },
@@ -217,6 +241,7 @@ namespace Booking.DAL.Configurations
                     Description = "Boutique Hotel Madrid combines style with central convenience.",
                     Stars = 4,
                     FixedDays = 5,
+                    HotelTypeId = 1,
                     IsPet = false,
                     CityId = 196
                 },
@@ -231,6 +256,7 @@ namespace Booking.DAL.Configurations
                     Description = "Lakeview Inn is a peaceful retreat in the heart of Hamburg.",
                     Stars = 4,
                     FixedDays = 6,
+                    HotelTypeId = 2,
                     IsPet = true,
                     CityId = 84
                 },
@@ -245,6 +271,7 @@ namespace Booking.DAL.Configurations
                     Description = "Ocean Breeze Hotel offers modern luxury with excellent amenities.",
                     Stars = 4,
                     FixedDays = 4,
+                    HotelTypeId = 7,
                     IsPet = false,
                     CityId = 196
                 },
@@ -259,10 +286,10 @@ namespace Booking.DAL.Configurations
                     Description = "Countryside Inn offers a rustic experience with modern comforts.",
                     Stars = 3,
                     FixedDays = 7,
+                    HotelTypeId = 8,
                     IsPet = true,
                     CityId = 86
                 }
-
             });
         }
     }

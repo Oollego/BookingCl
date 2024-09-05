@@ -18,8 +18,8 @@ namespace Booking.Domain.Dto.Hotel
         public double Rating { get; set; }
         public int ReviewQty { get; set; }
         public decimal MinRoomPrice { get; set; }
-        public List<HotelInfoComfortDto> HotelComforts { get; set; } = null!;
-        public List<NearStationDto> NearStations { get; set; } = null!;
+        public List<HotelInfoLabelDto> HotelLabels { get; set; } = null!;
+        public List<NearStationDto> NearPlaces { get; set; } = null!;
     }
  
 

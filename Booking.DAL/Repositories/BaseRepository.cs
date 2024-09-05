@@ -1,4 +1,5 @@
 ﻿using Booking.Domain.Interfaces.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,16 @@ namespace Booking.DAL.Repositories
         public IQueryable<TEntity> GetAll()
         {
             return _dbContext.Set<TEntity>();
+        }
+
+        public IQueryable<TEntity> FromSqlRaw(string sql, params object[] parameters)
+        {
+            return _dbContext.Set<TEntity>().FromSqlRaw(sql, parameters);
+        }
+
+        public IQueryable<TEntity> GetAllAsSplitQuery()
+        {
+            return _dbContext.Set<TEntity>().AsSplitQuery();
         }
 
         public TEntity Remove(TEntity entity)

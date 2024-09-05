@@ -24,19 +24,19 @@ namespace Booking.Domain.Interfaces.Services
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        Task<BaseResult<RoomResposeDto>> CreatRoomAsync(CreateRoomDto dto);
+        Task<BaseResult<RoomResponseDto>> CreatRoomAsync(CreateRoomDto dto);
 
         /// <summary>
         /// Delete room by Id
         /// </summary>
         /// <param name="roomId"></param>
         /// <returns></returns>
-        Task<BaseResult<RoomResposeDto>> DeleteRoomAsync(long roomId);
+        Task<BaseResult<RoomResponseDto>> DeleteRoomAsync(long roomId);
         /// <summary>
         /// Update room
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        Task<BaseResult<RoomResposeDto>> UpdateRoomAsync(UpdateRoomDto dto);
+        Task<BaseResult<RoomResponseDto>> UpdateRoomAsync(UpdateRoomDto dto);
     }
 }
