@@ -46,6 +46,8 @@ namespace Booking.Application.DependencyInjection
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IHotelService, HotelService>();
             services.AddScoped<IReviewService, ReviewService>();
+            services.AddScoped<IFacilityService, FacilityService>();
+            services.AddScoped<IInfoCellService, InfoCellService>();
         }
     }
 

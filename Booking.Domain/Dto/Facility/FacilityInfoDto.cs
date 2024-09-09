@@ -1,5 +1,4 @@
 ﻿
-
 namespace Booking.Domain.Dto.Facility
 {
     public class FacilityInfoDto

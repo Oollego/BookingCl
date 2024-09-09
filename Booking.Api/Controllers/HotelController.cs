@@ -1,6 +1,8 @@
 ﻿using Asp.Versioning;
 using Booking.Application.Services;
+using Booking.Domain.Dto.Facility;
 using Booking.Domain.Dto.Hotel;
+using Booking.Domain.Dto.HotelInfoCell;
 using Booking.Domain.Dto.Review;
 using Booking.Domain.Dto.Room;
 using Booking.Domain.Dto.SearchFilter;
@@ -18,12 +20,17 @@ namespace Booking.Api.Controllers
         private IHotelService _hotelService;
         private IRoomService _roomService;
         private IReviewService _reviewService;
+        private IFacilityService _facilityService;
+        private IInfoCellService _infoCellService;
 
-        public HotelController(IHotelService hotelService, IRoomService roomService, IReviewService reviewService)
+        public HotelController(IHotelService hotelService, IRoomService roomService, IReviewService reviewService, 
+            IFacilityService facilityService, IInfoCellService infoCellService)
         {
             _hotelService = hotelService;
             _roomService = roomService;
             _reviewService = reviewService;
+            _facilityService = facilityService;
+            _infoCellService = infoCellService;
         }
 
         /// <summary>
@@ -37,7 +44,7 @@ namespace Booking.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<BaseResult<TopHotelDto>>> GetTopHotel(int qty, int rating)
         {
-            var response = await _hotelService.GetTopHotels(qty, rating);
+            var response = await _hotelService.GetTopHotelsAsync(qty, rating);
 
             if (response.IsSuccess)
             {
@@ -86,7 +93,7 @@ namespace Booking.Api.Controllers
         public async Task<ActionResult<BaseResult<SearchFilterResponseDto>>> SearchFilters([FromBody] SearchFilterDto dto)
         {
  
-            var response = await _hotelService.GetSearchFilters(dto);
+            var response = await _hotelService.GetSearchFiltersAsync(dto);
 
             if (response.IsSuccess)
             {
@@ -117,10 +124,38 @@ namespace Booking.Api.Controllers
             return BadRequest(response);
         }
 
-        [HttpGet("info/Reviews/{id}")]
+        [HttpGet("info/facilities/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<BaseResult<HotelReviewDto>>> GetHotelReviewsInfo(long id, int qty)
+        public async Task<ActionResult<CollectionResult<FacilityInfoDto>>> GetHotelFacilitiesInfo(long id)
+        {
+            var response = await _facilityService.GetHotelFacilitiesAsync(id);
+
+            if (response.IsSuccess)
+            {
+                return Ok(response);
+            }
+            return BadRequest(response);
+        }
+
+        [HttpGet("info/cells/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<CollectionResult<HotelInfoCellDto>>> GetHotelCellsInfo(long id)
+        {
+            var response = await _infoCellService.GetHotelInfoCellsAsync(id);
+
+            if (response.IsSuccess)
+            {
+                return Ok(response);
+            }
+            return BadRequest(response);
+        }
+
+        [HttpGet("info/reviews/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<CollectionResult<HotelReviewDto>>> GetHotelReviewsInfo(long id, int qty)
         {
            
             var response = await _reviewService.GetHotelReviewsAsync(id, qty);

@@ -70,6 +70,15 @@ namespace Booking.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fasility Not Found.
+        /// </summary>
+        public static string FasilityNotFound {
+            get {
+                return ResourceManager.GetString("FasilityNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hotel already exists.
         /// </summary>
         public static string HotelAlreadyExists {
@@ -84,6 +93,15 @@ namespace Booking.Application.Resources {
         public static string HotelNotFound {
             get {
                 return ResourceManager.GetString("HotelNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 	Info cell not found.
+        /// </summary>
+        public static string InfoCellNotFound {
+            get {
+                return ResourceManager.GetString("InfoCellNotFound", resourceCulture);
             }
         }
         

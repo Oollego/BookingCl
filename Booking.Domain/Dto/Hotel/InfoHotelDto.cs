@@ -23,7 +23,5 @@ namespace Booking.Domain.Dto.Hotel
         public List<HotelInfoLabelDto> HotelLabels { get; set; } = null!;
         public ScoreDto Score { get; set; } = null!;
         public List<string> Images { get; set; } = null!;
-        public List<FacilityInfoDto> Facilities { get; set; } = null!;
-        public List<HotelInfoCellDto> InfoCell { get; set; } = null!;
     }
 }

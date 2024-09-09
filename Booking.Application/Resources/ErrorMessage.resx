@@ -120,11 +120,17 @@
   <data name="EmailIsNotCorrect" xml:space="preserve">
     <value>Email is not correct</value>
   </data>
+  <data name="FasilityNotFound" xml:space="preserve">
+    <value>Fasility Not Found</value>
+  </data>
   <data name="HotelAlreadyExists" xml:space="preserve">
     <value>Hotel already exists</value>
   </data>
   <data name="HotelNotFound" xml:space="preserve">
     <value>Hotel not found</value>
+  </data>
+  <data name="InfoCellNotFound" xml:space="preserve">
+    <value>	Info cell not found</value>
   </data>
   <data name="InternalServerError" xml:space="preserve">
     <value>Internal server error</value>
@@ -179,5 +185,6 @@
   </data>
   <data name="UserWasntCreated" xml:space="preserve">
     <value>User wasn't created</value>
+    <comment>s</comment>
   </data>
 </root>

@@ -14,8 +14,8 @@ namespace Booking.Domain.Dto.Hotel
         public int Adults { get; set; }
         public int Children { get; set; }
         public int Rooms { get; set; }
-        public int PageNumber { get; set; }
-        public int PageQty { get; set; }
+        public int Page { get; set; }
+        public int HotelQty { get; set; }
         public List<int>? Stars { get; set; } = null!;
         public List<double>? Rating { get; set; } = null!;
         public List<long>? HotelLabels { get; set; } = null!;

@@ -13,10 +13,10 @@ namespace Booking.Domain.Interfaces.Services
 {
     public interface IHotelService
     {
-        Task<CollectionResult<TopHotelDto>> GetTopHotels(int qty, int avgReview);
+        Task<CollectionResult<TopHotelDto>> GetTopHotelsAsync(int qty, int avgReview);
         Task<BaseResult<InfoHotelDto>> GetHotelInfoAsync(long hotelId, string? email);
         Task<BaseResult<SearchHotelResponseDto>> SearchHotelAsync(SearchHotelDto dto);
         Task<BaseResult<CreateHotelResponseDto>> CreateHotelAsync(CreateHotelDto dto);
-        Task<BaseResult<SearchFilterResponseDto>> GetSearchFilters(SearchFilterDto dto);
+        Task<BaseResult<SearchFilterResponseDto>> GetSearchFiltersAsync(SearchFilterDto dto);
     }
 }

@@ -32,6 +32,11 @@ namespace Booking.Domain.Enum
         HotelNotFound = 41,
         HotelAlreadyExists = 42,
 
-        ReviewNotFound = 51
+        ReviewNotFound = 51,
+
+        FasilityNotFound = 61,
+
+        InfoCellNotFound = 71
+
     }
 }

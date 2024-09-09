@@ -40,7 +40,7 @@ namespace Booking.Application.Services
         private readonly ILogger _logger = null!;
 
         public HotelService(IBaseRepository<Hotel> hotelRepository, IBaseRepository<User> userRepository,
-            IBaseRepository<Room> roomRepository, IMapper mapper, IHotelUnitOfWork hotelUnitOfWork, ILogger logger = null)
+            IBaseRepository<Room> roomRepository, IMapper mapper, IHotelUnitOfWork hotelUnitOfWork, ILogger logger)
         {
             _hotelRepository = hotelRepository;
             _userRepository = userRepository;
@@ -69,8 +69,6 @@ namespace Booking.Application.Services
                 .Include(x => x.Rooms)
                     .ThenInclude(x => x.RoomImages)
                 .Include(x => x.HotelLabelTypes)
-                .Include(x => x.HotelInfoCells).ThenInclude(x => x.InfoIcon)
-                .Include(x => x.Facilities).ThenInclude(x => x.FacilityGroup)
                 .Select(x => new InfoHotelDto
                 {
                     Id = x.Id,
@@ -99,20 +97,6 @@ namespace Booking.Application.Services
                         ValueScore = Math.Round(x.Reviews.Average(x => x.ValueScore), 1)
                     },
                     Images = x.Rooms.SelectMany(r => r.RoomImages.Select(ri => ri.ImageName)).ToList(),
-                    Facilities = x.Facilities
-                        .GroupBy(f => new { f.FacilityGroup.FacilityGroupName, f.FacilityGroup.FacilityGroupIcon })
-                        .Select(g => new FacilityInfoDto
-                        {
-                            GroupName = g.Key.FacilityGroupName,
-                            GroupIcon = g.Key.FacilityGroupIcon ?? "",
-                            Facilities = g.Select(f => f.FacilityName).ToList()
-                        }).ToList(),
-                    InfoCell = x.HotelInfoCells.Select(x => new HotelInfoCellDto
-                    {
-                        TextLine_1 = x.TextLine_1,
-                        TextLine_2 = x.TextLine_2,
-                        InfoIcon = x.InfoIcon!.IconFileName
-                    }).ToList()
                 }).FirstOrDefaultAsync();
 
             if (hotel == null)
@@ -145,8 +129,7 @@ namespace Booking.Application.Services
                 Data = hotel,
             };
         }
-
-        public async Task<CollectionResult<TopHotelDto>> GetTopHotels(int qty, int avgReview)
+        public async Task<CollectionResult<TopHotelDto>> GetTopHotelsAsync(int qty, int avgReview)
         {
             if (avgReview < 1 || avgReview > 10 || qty < 1 )
             {
@@ -211,8 +194,7 @@ namespace Booking.Application.Services
                 Count = hotels.Count
             };
         }
-
-        public async Task<BaseResult<SearchFilterResponseDto>> GetSearchFilters(SearchFilterDto dto)
+        public async Task<BaseResult<SearchFilterResponseDto>> GetSearchFiltersAsync(SearchFilterDto dto)
         {
             if (dto.CheckIn.Date < DateTime.UtcNow.Date || dto.CheckIn > dto.CheckOut ||
                dto.Adults < 1 || dto.Children < 0 || dto.Rooms < 1)
@@ -240,7 +222,7 @@ namespace Booking.Application.Services
                   h.Rooms.Any(r =>
                       (r.BedTypes.Sum(bd => bd.Adult) >= dto.Adults && r.BedTypes.Sum(bd => bd.Children) >= dto.Children) ||
                       r.BedTypes.Sum(bd => bd.Adult) >= (dto.Adults + dto.Children)) &&
-                  h.Rooms.Count(r => !r.Books.Any(b => dto.CheckIn < b.CheckOut && dto.CheckOut > b.CheckIn)) >= dto.Rooms)
+                  h.Rooms.Count(r => !r.Books.Any(b => dto.CheckIn < b.CheckOut && dto.CheckOut > b.CheckIn)) >= dto.Rooms
                );
 
             var rating = await queryHotels.GroupBy(h => Math.Floor(h.HotelData.Rating))
@@ -248,7 +230,7 @@ namespace Booking.Application.Services
                 {
                     Rating = g.Key,               
                     Matches = g.Count()    
-                }).ToListAsync();
+                }).OrderByDescending(x => x.Rating).ToListAsync();
 
             var labels = await queryHotels.SelectMany(h => h.HotelLabelTypes)
                 .GroupBy(l => l.LabelName)
@@ -256,14 +238,14 @@ namespace Booking.Application.Services
                 {
                     LabelName = g.Key,                
                     Matches = g.Count()
-                }).ToListAsync();
+                }).OrderBy(x => x.LabelName).ToListAsync();
 
             var stars = await queryHotels.GroupBy(h => h.Stars)
                 .Select(g => new StarFilterDto
                 {
                     Star = g.Key,
                     Matches = g.Count()
-                }).ToListAsync();
+                }).OrderByDescending(x => x.Star).ToListAsync();
 
             var nearPlaces = await queryHotels.SelectMany(h => h.NearStations)
                 .GroupBy(ns => ns.NearStationName.Name)
@@ -271,7 +253,7 @@ namespace Booking.Application.Services
                 {
                     PlaceName = g.Key,
                     Matches = g.Count()
-                }).ToListAsync();
+                }).OrderBy(x => x.PlaceName).ToListAsync();
 
             var facilities = await queryHotels.SelectMany(h => h.Facilities)
                 .GroupBy(f => f.FacilityName)
@@ -279,21 +261,21 @@ namespace Booking.Application.Services
                 {
                     FacilityName = g.Key,
                     Matches = g.Count()
-                }).ToListAsync();
+                }).OrderBy(x => x.FacilityName).ToListAsync();
 
             var hotelTypes = await queryHotels.GroupBy(h => h.HotelType.HotelTypeName)
                 .Select(g => new HotelTypeFilterDto
                 {
                     TypeName = g.Key,
                     Matches = g.Count()
-                }).ToListAsync();
+                }).OrderBy(x => x.TypeName).ToListAsync();
 
             var chains = await queryHotels.GroupBy(f => f.HotelChain.HotelChainName)
                 .Select(g => new HotelChainFilterDto
                 {
                     ChainName = g.Key,
                     Matches = g.Count()
-                }).ToListAsync();
+                }).OrderBy(x => x.ChainName).ToListAsync();
 
             var filters = new SearchFilterResponseDto();
 
@@ -374,8 +356,7 @@ namespace Booking.Application.Services
                     }).ToList(),
                 }).OrderBy(h => h.HotelName);
 
-            var hotels = await queryHotels.Skip(0).Take(15).ToListAsync();
-            //var hotels = await queryHotels.Skip(dto.PageNumber * dto.PageQty).Take(dto.PageQty).ToListAsync();
+            var hotels = await queryHotels.Skip(dto.Page * dto.HotelQty).Take(dto.HotelQty).ToListAsync();
 
             //    var queryHotels = _hotelRepository.GetAll().AsNoTracking()
             //.Include(h => h.Rooms)
@@ -485,7 +466,6 @@ namespace Booking.Application.Services
                 Data = hotelResponse
             };
         }
-
         public async Task<BaseResult<CreateHotelResponseDto>> CreateHotelAsync(CreateHotelDto dto)
         {
             if (dto.Stars < 0 || dto.FixedDays < 0 || dto.CityId < 0 || dto == null)
