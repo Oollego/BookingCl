@@ -1,0 +1,42 @@
+version: '3.4'
+
+services:
+    mysql:
+        image: mysql
+        container_name: mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: pass
+        volumes:
+            - mysql-data:/var/lib/mysql
+    phpmyadmin:
+        image: phpmyadmin
+        container_name: myadmin
+        environment:
+            - PMA_ARBITRARY=1
+            # - PMA_HOST0=mysql
+            # - PMA_CONTROLUSER=root
+            # - PMA_CONTROLPASS=pass
+        depends_on:
+            - mysql  
+        restart: unless-stopped
+        
+    nginx:
+        image: nginx:alpine-slim
+        container_name: nginx
+        volumes:
+            - ./conf.d:/etc/nginx/conf.d
+        depends_on:
+            - booking
+
+    booking:
+        image: ${DOCKER_REGISTRY-}bookingapi
+        container_name: booking
+        depends_on:
+            - mysql
+        build:
+            context: .
+            dockerfile: Booking.Api/Dockerfile
+        restart: unless-stopped
+
+volumes:
+    mysql-data:

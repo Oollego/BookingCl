@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/sets/booking-key.pem
+/sets/booking-key.pem
+/docker-compose.yml
+/docker-compose.override.yml
+/sets/booking-key.pem
